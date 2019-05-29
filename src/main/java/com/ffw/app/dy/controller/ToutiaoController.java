@@ -53,6 +53,8 @@ public class ToutiaoController extends BaseController {
 		pdm = rest.post(IConstant.FFW_SERVICE_KEY, "member/findBy", pdm, PageData.class);
 		if (null == pdm) {
 			pd.put("MEMBERTYPE_ID", IConstant.STRING_1);
+			pd.put("CLASS", "dy");
+			pd.put("MARKET_ID", pd.getString("MARKET_ID"));
 			pd.put("WAITACCOUNT", IConstant.STRING_0);
 			pd.put("ALREADYACCOUNT", IConstant.STRING_0);
 			if (null == pd.get("FROMWXOPEN_ID") || pd.getString("FROMWXOPEN_ID").equals("null")) {
