@@ -23,4 +23,6 @@ public interface IConstant {
 	String NO_INTERCEPTOR_PATH = null;
 
 	String MARKET_SESSION = "MARKET_SESSION";
+
+	Object STRING_CLASS_DY = "dy";
 }

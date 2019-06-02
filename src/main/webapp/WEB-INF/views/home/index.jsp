@@ -83,7 +83,7 @@
     				    
     				    <div class="card-footer">
   				      <span><font style="color:#F40A0B;">`+value.SELLMONEY+`元</font></span>
-  				      <span><a class="external button button-fill">立即购买</a></span>
+  				      <span><a href="<%=request.getContextPath()%>/goBuy?GOODS_ID=`+value.GOODS_ID+`" class="external button button-fill">立即购买</a></span>
   				    </div>
   				  <div class="card-footer">
 			      <span class="delete">原价 `+value.ORIGINALMONEY+`元</span>
