@@ -56,7 +56,7 @@
 						<div class="col-20"><img style="width:50px;border-radius:50%;border:1px #AAAAAA solid;" src="<%=request.getContextPath()%>/static/icon/add.jpg"/></div>
 					</c:if>
 					<c:forEach var="var" items="${peopleDataList}">
-						<div class="col-20"><img align="middle" style="width:90%;border-radius:50%;" src="${var.PHOTO}"/></div>
+						<div class="col-20"><img align="middle" style="width:90%;border-radius:50%;margin-bottom:5px;" src="${var.PHOTO}"/></div>
 					</c:forEach>
 			</div>
 			<div style="width:100%;height:5px;background:#dddddd;">&nbsp;</div>
