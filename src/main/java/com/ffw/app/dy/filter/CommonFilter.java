@@ -32,17 +32,21 @@ public class CommonFilter implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest arg0, ServletResponse arg1,
-			FilterChain arg2) throws IOException, ServletException {
+	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
+			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		String openID = request.getParameter("openid");
 		if (StringUtils.isNotEmpty(openID)) {
 
 			PageData pdm = new PageData();
 			pdm.put("WXOPEN_ID", openID);
-			pdm = rest.post(IConstant.FFW_SERVICE_KEY, "member/findBy", pdm,
-					PageData.class);
+			pdm = rest.post(IConstant.FFW_SERVICE_KEY, "member/findBy", pdm, PageData.class);
 			request.getSession().setAttribute(IConstant.USER_SESSION, pdm);
+
+			PageData market = new PageData();
+			market.put("MARKET_ID", pdm.getString("MARKET_ID"));
+			market = rest.post(IConstant.FFW_SERVICE_KEY, "market/find", market, PageData.class);
+			request.getSession().setAttribute(IConstant.MARKET_SESSION, market);
 
 		}
 

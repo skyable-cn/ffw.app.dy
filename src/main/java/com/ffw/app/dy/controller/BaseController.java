@@ -158,4 +158,13 @@ public class BaseController {
 	public String openId() {
 		return userSession().getString("WXOPEN_ID");
 	}
+
+	public PageData marketSession() {
+		return (PageData) getSession().getAttribute(IConstant.MARKET_SESSION);
+	}
+
+	public String marketId() {
+		return marketSession().getString("MARKET_ID");
+	}
+
 }

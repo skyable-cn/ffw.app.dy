@@ -25,7 +25,7 @@
 		    //延迟一秒执行自己
 		    
 		    if(days<0 || hours<0 || minutes<0 || seconds <0){
-		    	document.getElementById(id+"_left").style.display = 'none';
+		    	//document.getElementById(id+"_left").style.display = 'none';
 		    	document.getElementById(id+"_right").style.display = 'none';
 		    	return;
 		    }
