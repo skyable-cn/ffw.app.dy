@@ -24,7 +24,7 @@
 				 	<img align="middle" style="margin:10px; width:80px;border-radius:50%;" src="${USER_SESSION.PHOTO}"/>${USER_SESSION.NICKNAME}
 				 </div>
 				 <div class="div_height2" style="background:#ffffff;height:140px;position:absolute;top:130px;z-index:999;left:10px;right:10px;-webkit-box-shadow: 3px 3px 12px #666;-moz-box-shadow: 3px 3px 12px #666;box-shadow: 3px 3px 12px #666; -moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;">
-					 <div class="row">
+					 <a class="external" href="<%=request.getContextPath()%>/orders/all"><div class="row">
 					 	<div class="col-50" style="text-align:left;padding:20px 15px;">
 					 		我的订单
 					 	</div>
@@ -32,6 +32,7 @@
 					 		全部订单&nbsp;&gt;
 					 	</div>
 					 </div>
+					 </a>
 					 <div class="row">
 					 	<div class="col-100" style="padding:0 10px;">
 					 		<div style="width:100%;height:1px;background:#EEEEEE;">&nbsp;</div>
@@ -39,9 +40,9 @@
 					 </div>
 					 <div class="row" style="margin-top:10px;">
 					 	<div class="col-25" style="text-align: center;"><a class="external" href="<%=request.getContextPath()%>/orders/waitpay"><img width="40%" src="<%=request.getContextPath()%>/static/icon/dfk.png"/><br/>待付款</a></div>
-						<div class="col-25" style="text-align: center;"><a class="external" href="<%=request.getContextPath()%>/orders/payed"><img width="40%" src="<%=request.getContextPath()%>/static/icon/dsy.png"/><br/>待使用</a></div>
-						<div class="col-25" style="text-align: center;"><a class="external" href="<%=request.getContextPath()%>/orders/waituse"><img width="40%" src="<%=request.getContextPath()%>/static/icon/dsh.png"/><br/>待收货</a></div>
-						<div class="col-25" style="text-align: center;"><a class="external" href="<%=request.getContextPath()%>/orders/complate"><img width="40%" src="<%=request.getContextPath()%>/static/icon/dpj.png"/><br/>待评价</a></div>
+						<div class="col-25" style="text-align: center;"><a class="external" href="<%=request.getContextPath()%>/orders/waituse"><img width="40%" src="<%=request.getContextPath()%>/static/icon/dsy.png"/><br/>待使用</a></div>
+						<div class="col-25" style="text-align: center;"><a class="external" href="<%=request.getContextPath()%>/orders/waitrecive"><img width="40%" src="<%=request.getContextPath()%>/static/icon/dsh.png"/><br/>待收货</a></div>
+						<div class="col-25" style="text-align: center;"><a class="external" href="<%=request.getContextPath()%>/orders/waitrate"><img width="40%" src="<%=request.getContextPath()%>/static/icon/dpj.png"/><br/>待评价</a></div>
 					 </div>
 				 </div>
 				</div>

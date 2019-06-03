@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <%@ include file="../common/headcss.jsp"%>
-    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+    <script type="text/javascript" src="https://s3.pstatp.com/toutiao/tmajssdk/jssdk-1.0.0.js"></script>
   </head>
   <body>
     <div class="page-group">
@@ -40,6 +40,7 @@
 						<div style="text-align:center;">有效期 ${order.STARTTIME}~${order.ENDTIME}</div>
 					</div>
 				</div>
+				<!-- 
 				<div style="margin:10px;border:1px #CCCCCC solid;height:100px;">
 					<div class="row">
 						<div class="col-50" style="padding:7px;padding-top:15px;">核销码</div>
@@ -65,6 +66,21 @@
 						<div style="text-align:center;">好友接收成功后,订单无法退款,你将不能再核销</div>
 					</div>
 				</div>
+				 -->
+				 
+				 <div class="content-block" style="margin-top:15px;margin-bottom:15px;">
+				    <a href="#" class="button button-big button-fill" style="background:#FFCC01;color:#000000;"><span style="float:left;">核销码:${order.USEKEY}</span>
+				    <span style="float:right;"><c:choose>
+				    	<c:when test="${order.STATE eq 0}">待付款</c:when>
+				    	<c:when test="${order.STATE eq 1}">已支付</c:when>
+				    	<c:when test="${order.STATE eq 2}">待使用</c:when>
+				    	<c:when test="${order.STATE eq 3}">已使用</c:when>
+				    	<c:when test="${order.STATE eq 5}">已退款</c:when>
+				    	<c:otherwise>未知</c:otherwise>
+				    </c:choose></span></a>
+				</div>
+				 
+				 
 				<div class="row" style="padding:5px;padding-top:30px;">
 					<div class="col-100">
 						<div style="text-align:center;font-size:0.85rem;">使用方法</div>
@@ -102,7 +118,7 @@
 					</div>
 				</div>
 				<c:if test="${fn:length(useData) eq 0}">
-				<div class="content-block" style="margin-left:2%;margin-right:2%;margin-top:15px;margin-bottom:15px;">
+				<div class="content-block" style="margin-top:15px;margin-bottom:15px;">
 				    <a href="#" class="button button-big button-fill" style="background:#FFCC01;color:#000000;">暂无核销记录</a>
 				</div>
 				</c:if>
@@ -231,29 +247,6 @@
   </body>
   <%@ include file="../common/headjs.jsp"%>
     <script type="text/javascript">
-    
-    	wx.config({  
-    	    debug: false,
-    	    appId: "${config.appId}", 
-    	    timestamp: "${config.timestamp}",
-    	    nonceStr: "${config.noncestr}",
-    	    signature: "${config.signature}",  
-    	    jsApiList: [  
-    	        'previewImage'
-    	    ]  
-    	}); 
-    	
-    	wx.ready(
-    		function(){
-    			
-    		}
-    	);
-    	
-    	wx.error(
-    		function(res){
-    			console.log(res);
-    		}
-    	);
     	
     	function preview(){
     		wx.previewImage({
@@ -303,19 +296,19 @@
     			return;
     		}
     		
-    		wx.miniProgram.navigateTo({
+    		tt.miniProgram.navigateTo({
                 url: '/pages/share/share?type=orders&fromopenid=${USER_SESSION.WXOPEN_ID}&image=orders.jpg&datakey=${order.ORDER_ID}&title=转赠好友订单'
            })
     		
       	}
     	
     	function phone(){
-      		wx.miniProgram.navigateTo({
+      		tt.miniProgram.navigateTo({
                 url: '/pages/phone/phone?phone=${order.CONTRACTPHONE}'
            })
       	}
       	function position(){
-      		wx.miniProgram.navigateTo({
+      		tt.miniProgram.navigateTo({
                 url: '/pages/position/position?latitude=${order.LATITUDE}&longitude=${order.LONGITUDE}&address=${order.SHOPADDRESS}'
            })
       	}
