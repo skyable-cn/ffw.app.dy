@@ -17,7 +17,62 @@
     <div class="page-group">
         <div class="page page-current">
 			<div class="content">
-				
+				<div class="row">
+				<div class="col-100" style="position:relative;height:280px;">
+				 <div><img class='card-cover div_height1' height="200" width="100%" src="<%=request.getContextPath()%>/static/icon/me.png" alt=""></div>
+				 <div style="height:150px;position:absolute;top:20px;z-index:999;left:5%;right:5%;font-size:0.85rem;">
+				 	<img align="middle" style="margin:10px; width:80px;border-radius:50%;" src="${USER_SESSION.PHOTO}"/>${USER_SESSION.NICKNAME}
+				 </div>
+				 <div class="div_height2" style="background:#ffffff;height:140px;position:absolute;top:130px;z-index:999;left:10px;right:10px;-webkit-box-shadow: 3px 3px 12px #666;-moz-box-shadow: 3px 3px 12px #666;box-shadow: 3px 3px 12px #666; -moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;">
+					 <div class="row">
+					 	<div class="col-50" style="text-align:left;padding:20px 15px;">
+					 		我的订单
+					 	</div>
+					 	<div class="col-50" style="text-align: right;padding:20px 15px;">
+					 		全部订单&nbsp;&gt;
+					 	</div>
+					 </div>
+					 <div class="row">
+					 	<div class="col-100" style="padding:0 10px;">
+					 		<div style="width:100%;height:1px;background:#EEEEEE;">&nbsp;</div>
+					 	</div>
+					 </div>
+					 <div class="row" style="margin-top:10px;">
+					 	<div class="col-25" style="text-align: center;"><a class="external" href="<%=request.getContextPath()%>/orders/waitpay"><img width="40%" src="<%=request.getContextPath()%>/static/icon/dfk.png"/><br/>待付款</a></div>
+						<div class="col-25" style="text-align: center;"><a class="external" href="<%=request.getContextPath()%>/orders/payed"><img width="40%" src="<%=request.getContextPath()%>/static/icon/dsy.png"/><br/>待使用</a></div>
+						<div class="col-25" style="text-align: center;"><a class="external" href="<%=request.getContextPath()%>/orders/waituse"><img width="40%" src="<%=request.getContextPath()%>/static/icon/dsh.png"/><br/>待收货</a></div>
+						<div class="col-25" style="text-align: center;"><a class="external" href="<%=request.getContextPath()%>/orders/complate"><img width="40%" src="<%=request.getContextPath()%>/static/icon/dpj.png"/><br/>待评价</a></div>
+					 </div>
+				 </div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-100" style="padding:10px;">
+			<div class="div_height2" style="background:#ffffff;left:10px;right:10px;border-radius: 5px;border:1px #EEEEEE solid;-webkit-box-shadow: 3px 3px 12px #666;-moz-box-shadow: 3px 3px 12px #666;box-shadow: 3px 3px 12px #666; -moz-border-radius: 5px;-webkit-border-radius: 5px;">
+					 <div class="row">
+					 	<div class="col-50" style="text-align:left;padding:20px 15px;">
+					 		我的钱包
+					 	</div>
+					 	<div class="col-50" style="text-align:right;padding:20px 15px;">
+					 		&gt;
+					 	</div>
+					 </div>
+					 	 <div class="row">
+					 	<div class="col-100" style="padding:0 10px;">
+					 		<div style="width:100%;height:1px;background:#EEEEEE;">&nbsp;</div>
+					 	</div>
+					 </div>
+					 <a class="external" href="<%=request.getContextPath()%>/seller/list"><div class="row">
+					 	<div class="col-50" style="text-align:left;padding:20px 15px;">
+					 		商家后台
+					 	</div>
+					 	<div class="col-50" style="text-align:right;padding:20px 15px;">
+					 		&gt;
+					 	</div>
+					 </div></a>
+				 </div>
+				 </div>
+				 </div>
         	</div>
         	<%@ include file="../common/nav.jsp"%>
     	</div>

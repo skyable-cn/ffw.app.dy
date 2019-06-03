@@ -85,7 +85,7 @@
         	  </c:if>
         	   -->
         	   <div style="width:100%;height:10px;background:#dddddd;">&nbsp;</div>
-        	   <div class="list-block" style="margin-top:5px;margin-bottom:50px;">
+        	   <div class="list-block" style="margin-top:5px;margin-bottom:2.5rem;">
 		    <ul>
 		      <!-- Text inputs -->
 		      <li>
