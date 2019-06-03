@@ -19,7 +19,7 @@
 			<div class="content infinite-scroll" data-distance="30">
 						<div class="row" style="padding:5px;">
 				<div class="col-100">
-				
+		      		<div style="font-size:1.0rem;text-align: center;border:1px #AAAAAA solid;border-radius:5px;"><p style="padding:40px auto;">已核销待结算${shop.WAITACCOUNT}元</p></div>
 		      <div class="row">
 		      	<div class="col-100">
 				    <div class="search-input"  style="width:calc(100% - 40px);float:left;margin-top:2px;hei">
