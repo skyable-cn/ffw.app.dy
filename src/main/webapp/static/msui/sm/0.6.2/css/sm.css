@@ -1291,7 +1291,6 @@ a:active {
   width: 100%;
   background-color: #e7e7e7;
   display: block;
-  z-index: 15;
   -webkit-transform-origin: 50% 0%;
           transform-origin: 50% 0%;
 }
@@ -1318,7 +1317,6 @@ a:active {
   width: 100%;
   background-color: #e7e7e7;
   display: block;
-  z-index: 15;
   -webkit-transform-origin: 50% 100%;
           transform-origin: 50% 100%;
 }
@@ -1492,7 +1490,6 @@ a:active {
   width: 100%;
   background-color: #e7e7e7;
   display: block;
-  z-index: 15;
   -webkit-transform-origin: 50% 100%;
           transform-origin: 50% 100%;
 }
@@ -1600,7 +1597,6 @@ html:not(.watch-active-state) .list-block .item-link:active .item-inner:after,
   width: 100%;
   background-color: #e7e7e7;
   display: block;
-  z-index: 15;
   -webkit-transform-origin: 50% 100%;
           transform-origin: 50% 100%;
 }
@@ -1618,7 +1614,7 @@ html:not(.watch-active-state) .list-block .item-link:active .item-inner:after,
 }
 .list-block .item-content {
   box-sizing: border-box;
-  padding-left: 0.75rem;
+  padding-left: 5px;
   min-height: 2.2rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1716,7 +1712,6 @@ html:not(.watch-active-state) .list-block .item-link:active .item-inner:after,
   width: 100%;
   background-color: #e7e7e7;
   display: block;
-  z-index: 15;
   -webkit-transform-origin: 50% 0%;
           transform-origin: 50% 0%;
 }
@@ -1765,7 +1760,6 @@ html:not(.watch-active-state) .list-block .item-link:active .item-inner:after,
   width: 100%;
   background-color: #e7e7e7;
   display: block;
-  z-index: 15;
   -webkit-transform-origin: 50% 100%;
           transform-origin: 50% 100%;
 }

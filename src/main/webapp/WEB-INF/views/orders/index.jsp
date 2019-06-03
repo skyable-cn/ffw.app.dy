@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <%@ include file="../common/headcss.jsp"%>
-    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+    <script type="text/javascript" src="https://s3.pstatp.com/toutiao/tmajssdk/jssdk-1.0.0.js"></script>
   </head>
   <body>
     <div class="page-group">
@@ -26,7 +26,7 @@
 					<div>${pd.GOODSDESC}</div>
 					</div>
 				</div>
-				<div style="width:100%;height:5px;background:#dddddd;">&nbsp;</div>
+				<div style="width:100%;height:10px;background:#dddddd;">&nbsp;</div>
 				<div class="row" style="padding:10px;padding-top:10px;padding-bottom:10px;">
 					<div class="col-50" style="line-height:50px;">购买数量</div>
 					<div class="col-50"><div style="margin-right:20px;float:right;"><button style="width:35px;margin-right:1px;height:35px;" onclick="computer('-1')">-</button><button style="width:40px;background:#FFFFFF;height:35px;" id="numberButton">1</button><button style="width:35px;margin-left:1px;height:35px;" onclick="computer('1')">+</button></div></div>
@@ -58,6 +58,7 @@
 					<div class="col-50">实付金额</div>
 					<div class="col-50"><div style="margin-right:20px;float:right;"><span id="SF" style="font-size:0.7rem;">${pd.SELLMONEY}</span>元</div></div>
 				</div>
+				<!-- 
 				<c:if test="${vipinfo ne null}">
 				<div style="width:100%;height:1px;background:#dddddd;">&nbsp;</div>
 				</c:if>
@@ -82,8 +83,32 @@
         	  </div>
         	  <div style="width:100%;height:5px;background:#dddddd;">&nbsp;</div>
         	  </c:if>
+        	   -->
+        	   <div style="width:100%;height:10px;background:#dddddd;">&nbsp;</div>
+        	   <div class="list-block" style="margin-top:5px;margin-bottom:50px;">
+		    <ul>
+		      <!-- Text inputs -->
+		      <li>
+		        <div class="item-content">
+		          <div class="item-inner">
+		            <div class="item-input">
+		              <input id="USEPERSON" name="USEPERSON" type="text" placeholder="您的姓名">
+		            </div>
+		          </div>
+		        </div>
+		      </li>
+		      <li>
+		        <div class="item-content">
+		          <div class="item-inner">
+		            <div class="item-input">
+		              <input id="PERSONPHONE" name="PERSONPHONE" type="text" placeholder="联系方式">
+		            </div>
+		          </div>
+		        </div>
+		      </li>
+		    </ul>
+		  </div>
         	</div>
-        	
         	<nav class="bar bar-tab">
   <div class="row">
   	<a class="tab-item external" href="javascript:;" style="color:#000000;">实付款: ¥ <span id="SFC">${pd.SELLMONEY}</span>元</a>
@@ -192,7 +217,9 @@
 	    		"NUMBER":$("#numberButton").text(),
 	    		"FROMWXOPEN_ID":'${FROMWXOPEN_ID}',
 	    		"NEEDMONEY":$("#SF").text(),
-	    		"PERCENT":PERCENT
+	    		"PERCENT":PERCENT,
+	    		"USEPERSON":$("#USEPERSON").val(),
+	    		"PERSONPHONE":$("#PERSONPHONE").val()
 	    	},
 	    	async: false,
 			dataType:'json',
@@ -219,7 +246,7 @@
   	}
   	
   	function goPay(data){
- 		 wx.miniProgram.navigateTo({
+ 		 tt.miniProgram.navigateTo({
             url: '/pages/pay/pay?type=goods&id='+data.ORDER_ID+'&sn='+data.ORDERSN+'&original='+data.ORIGINAL+'&derate='+data.DERATE+'&money='+data.MONEY
        })
  	}
