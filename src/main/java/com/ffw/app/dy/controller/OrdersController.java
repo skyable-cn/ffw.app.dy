@@ -345,6 +345,26 @@ public class OrdersController extends BaseController {
 		return rm;
 	}
 
+	@RequestMapping(value = { "/orders/rate/save" })
+	@ResponseBody
+	public ReturnModel rateSave() {
+		logger.info("进入订单评价保存");
+		ReturnModel rm = new ReturnModel();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+
+		pd.put("CDT", DateUtil.getTime());
+		rest.post(IConstant.FFW_SERVICE_KEY, "orders/saveRate", pd, PageData.class);
+
+		PageData pdo = new PageData();
+		pdo.put("ORDER_ID", pd.getString("ORDER_ID"));
+		pdo.put("STATE", IConstant.STRING_4);
+		rest.post(IConstant.FFW_SERVICE_KEY, "orders/edit", pdo, PageData.class);
+		rm.setFlag(true);
+		rm.setData(pd);
+		return rm;
+	}
+
 	@RequestMapping(value = { "/orders/refund" })
 	public ModelAndView refund() {
 		logger.info("进入订单退款信息");
@@ -396,6 +416,23 @@ public class OrdersController extends BaseController {
 		mv.addObject("order", order);
 
 		mv.setViewName("orders/info");
+		return mv;
+	}
+
+	@RequestMapping(value = { "/orders/rate" })
+	public ModelAndView rate() {
+		logger.info("进入订单评价");
+		ModelAndView mv = new ModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+
+		PageData order = new PageData();
+		order.put("ORDER_ID", pd.getString("ORDER_ID"));
+		order = rest.post(IConstant.FFW_SERVICE_KEY, "orders/find", order, PageData.class);
+
+		mv.addObject("order", order);
+
+		mv.setViewName("orders/rate");
 		return mv;
 	}
 

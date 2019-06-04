@@ -204,7 +204,7 @@
 			    </div>
 			    <div class="card-footer">
 			      <span></span>
-			      <span><button onclick="goInfo('${var.ORDER_ID}');" class="button" style="background:#FFCC01;color:#000000;display:inline;margin-right:10px;">立即评价</button><button onclick="goRate('${var.ORDER_ID}');" class="button" style="background:#FFCC01;color:#000000;display:inline;">查看详情</button></span>
+			      <span><button onclick="goRate('${var.ORDER_ID}');" class="button" style="background:#FFCC01;color:#000000;display:inline;margin-right:10px;">立即评价</button><button onclick="goRate('${var.ORDER_ID}');" class="button" style="background:#FFCC01;color:#000000;display:inline;">查看详情</button></span>
 			    </div>
 			  </div>
 			  </c:if>
