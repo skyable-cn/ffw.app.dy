@@ -243,6 +243,44 @@ public class OrdersController extends BaseController {
 		return mv;
 	}
 
+	@RequestMapping(value = { "/orders/waitrecive" })
+	public ModelAndView waitRecive() {
+		logger.info("进入待收货");
+		ModelAndView mv = new ModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+
+		PageData pd2 = new PageData();
+		pd2.put("MEMBER_ID", memberId());
+		pd2.put("STATE", IConstant.STRING_11);
+		List<PageData> ordersData = rest.postForList(IConstant.FFW_SERVICE_KEY, "orders/listAll", pd2,
+				new ParameterizedTypeReference<List<PageData>>() {
+				});
+		mv.addObject("ordersData", ordersData);
+
+		mv.setViewName("orders/waitrecive");
+		return mv;
+	}
+
+	@RequestMapping(value = { "/orders/waitrate" })
+	public ModelAndView waitRate() {
+		logger.info("进入待评价");
+		ModelAndView mv = new ModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+
+		PageData pd2 = new PageData();
+		pd2.put("MEMBER_ID", memberId());
+		pd2.put("STATE", IConstant.STRING_3);
+		List<PageData> ordersData = rest.postForList(IConstant.FFW_SERVICE_KEY, "orders/listAll", pd2,
+				new ParameterizedTypeReference<List<PageData>>() {
+				});
+		mv.addObject("ordersData", ordersData);
+
+		mv.setViewName("orders/waitrate");
+		return mv;
+	}
+
 	@RequestMapping(value = { "/orders/complate" })
 	public ModelAndView waitUsed() {
 		logger.info("进入已完成");
@@ -252,7 +290,7 @@ public class OrdersController extends BaseController {
 
 		PageData pd2 = new PageData();
 		pd2.put("MEMBER_ID", memberId());
-		pd2.put("SQLCONDITION", " and os.STATE IN ( '3' , '5' ) ");
+		pd2.put("SQLCONDITION", " and os.STATE IN ( '4' , '5' ) ");
 		List<PageData> ordersData = rest.postForList(IConstant.FFW_SERVICE_KEY, "orders/listAll", pd2,
 				new ParameterizedTypeReference<List<PageData>>() {
 				});

@@ -25,4 +25,6 @@ public interface IConstant {
 	String MARKET_SESSION = "MARKET_SESSION";
 
 	Object STRING_CLASS_DY = "dy";
+
+	Object STRING_11 = "11";
 }

@@ -21,10 +21,14 @@
 					<div class="col-100" style="text-align:right;">
 					<c:choose>
 				    	<c:when test="${order.STATE eq 0}">待付款</c:when>
-				    	<c:when test="${order.STATE eq 1}">已支付</c:when>
+				    	<c:when test="${order.STATE eq 1}">待确认</c:when>
 				    	<c:when test="${order.STATE eq 2}">待使用</c:when>
-				    	<c:when test="${order.STATE eq 3}">已使用</c:when>
+				    	<c:when test="${order.STATE eq 3}">待评价</c:when>
 				    	<c:when test="${order.STATE eq 5}">已退款</c:when>
+				    	<c:when test="${order.STATE eq 4}">已评价</c:when>
+				    	<c:when test="${order.STATE eq 10}">待发货</c:when>
+				    	<c:when test="${order.STATE eq 11}">待收货</c:when>
+				    	<c:when test="${order.STATE eq 12}">待签收</c:when>
 				    	<c:otherwise>未知</c:otherwise>
 				    </c:choose>
 			    </div>
@@ -32,7 +36,7 @@
 				<div style="width:100%;height:7px;background:#dddddd;">&nbsp;</div>
 			  	<div class="row" style="padding:5px;">
 					<div class="col-25">&nbsp;</div>
-					<div class="col-50"><img onclick="preview()" alt="" src="<%=request.getContextPath()%>/orders/barcode?USEID=${order.USEID}" width="100%"></div>
+					<div class="col-50"><img alt="" src="<%=request.getContextPath()%>/orders/barcode?USEID=${order.USEID}" width="100%"></div>
 					<div class="col-25">&nbsp;</div>
 				</div>
 				<div class="row" style="padding:5px;">
@@ -72,10 +76,14 @@
 				    <a href="#" class="button button-big button-fill" style="background:#FFCC01;color:#000000;"><span style="float:left;">核销码:${order.USEKEY}</span>
 				    <span style="float:right;"><c:choose>
 				    	<c:when test="${order.STATE eq 0}">待付款</c:when>
-				    	<c:when test="${order.STATE eq 1}">已支付</c:when>
+				    	<c:when test="${order.STATE eq 1}">待确认</c:when>
 				    	<c:when test="${order.STATE eq 2}">待使用</c:when>
-				    	<c:when test="${order.STATE eq 3}">已使用</c:when>
+				    	<c:when test="${order.STATE eq 3}">待评价</c:when>
 				    	<c:when test="${order.STATE eq 5}">已退款</c:when>
+				    	<c:when test="${order.STATE eq 4}">已评价</c:when>
+				    	<c:when test="${order.STATE eq 10}">待发货</c:when>
+				    	<c:when test="${order.STATE eq 11}">待收货</c:when>
+				    	<c:when test="${order.STATE eq 12}">待签收</c:when>
 				    	<c:otherwise>未知</c:otherwise>
 				    </c:choose></span></a>
 				</div>
@@ -247,13 +255,6 @@
   </body>
   <%@ include file="../common/headjs.jsp"%>
     <script type="text/javascript">
-    	
-    	function preview(){
-    		wx.previewImage({
-	   			current: 'https://fanfan.skyable.cn<%=request.getContextPath()%>/orders/barcode?ORDER_ID=${order.ORDER_ID}', // 当前显示图片的http链接
-	   			urls: ['https://fanfan.skyable.cn<%=request.getContextPath()%>/orders/barcode?ORDER_ID=${order.ORDER_ID}'] // 需要预览的图片http链接列表
-   			});
-    	}
 
     	function goRefund(id,sn,mn,state){
     		if(state == '0'){

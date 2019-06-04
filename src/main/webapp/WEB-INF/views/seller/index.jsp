@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <%@ include file="../common/headcss.jsp"%>
-    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+    <script type="text/javascript" src="https://s3.pstatp.com/toutiao/tmajssdk/jssdk-1.0.0.js"></script>
   </head>
   <body>
     <div class="page-group">
@@ -111,10 +111,7 @@
   <%@ include file="../common/headjs.jsp"%>
   <script>
    function position(){
-	   //var data = "SHOPNAME="+$("#SHOPNAME").val()+"&CONTRACTPEOPLE="+$("#CONTRACTPEOPLE").val()+"&CONTRACTPHONE="+$("#CONTRACTPHONE").val()+"&SHOPDESC="+$("#SHOPDESC").val();
-	   //location.href='https://apis.map.qq.com/tools/locpicker?search=1&type=0&backurl=http://192.168.0.4:8081/app/sellerInit?'+encodeURIComponent(data)+'&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp';
-	   
-	   wx.miniProgram.navigateTo({
+	  tt.miniProgram.navigateTo({
             url: '/pages/address/address?SHOPNAME='+encodeURI($("#SHOPNAME").val())+'&SHOPTYPE_ID='+$("#SHOPTYPE_ID").val()
        })
    }

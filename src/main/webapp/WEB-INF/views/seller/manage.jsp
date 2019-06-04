@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <%@ include file="../common/headcss.jsp"%>
-    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+    <script type="text/javascript" src="https://s3.pstatp.com/toutiao/tmajssdk/jssdk-1.0.0.js"></script>
   </head>
   <body>
     <div class="page-group">
@@ -26,7 +26,7 @@
 				      <label class="icon icon-search" for="search"></label>
 				      <input type="search" id='search' placeholder='输入关键字...'/>
 				    </div>
-				<div onclick="scanEWM()" style="width:40px;float:right;text-align:center;"><img align="middle" width="30" src="<%=request.getContextPath()%>/static/icon/scan.png"/></div>
+				<div onclick="scan()" style="width:40px;float:right;text-align:center;"><img align="middle" width="30" src="<%=request.getContextPath()%>/static/icon/scan.png"/></div>
 				</div>
 		      </div>
 		      <div id="orders">
@@ -41,29 +41,13 @@
   </body>
   <%@ include file="../common/headjs.jsp"%>
   <script type="text/javascript">
-	  wx.config({  
-	  	    debug: false,
-	  	    appId: "${config.appId}", 
-	  	    timestamp: "${config.timestamp}",
-	  	    nonceStr: "${config.noncestr}",
-	  	    signature: "${config.signature}",  
-	  	    jsApiList: [  
-	      		'scanQRCode' 
-	  	    ]  
-	  	}); 
-  	
-  	wx.ready(
-  		function(){
-  			
-  		}
-  	);
-  	
-  	wx.error(
-  		function(res){
-  			console.log(res);
-  		}
-  	);
-  	
+	 
+  function scan(){
+		tt.miniProgram.navigateTo({
+          url: '/pages/scan/scan?shopid=${shop.SHOP_ID}'
+     })
+	}
+  
   	function scanEWM(){
   		wx.scanQRCode({
   			needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，

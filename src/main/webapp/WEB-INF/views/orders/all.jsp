@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <%@ include file="../common/headcss.jsp"%>
-    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+    <script type="text/javascript" src="https://s3.pstatp.com/toutiao/tmajssdk/jssdk-1.0.0.js"></script>
   </head>
   <body>
     <div class="page-group">
@@ -24,7 +24,8 @@
 			    <a href="#tab1" class="tab-link active button">全部</a>
 			    <a href="#tab2" class="tab-link button">待付款</a>
 			    <a href="#tab3" class="tab-link button">待使用</a>
-			    <a href="#tab4" class="tab-link button">已核销</a>
+			    <a href="#tab4" class="tab-link button">待收货</a>
+			    <a href="#tab5" class="tab-link button">待评价</a>
 			</div>
 		    <div class="tabs">
 		      <div id="tab1" class="tab active">
@@ -33,10 +34,14 @@
 			    <div class="card-header">下单时间:${var.CDT}<span style="float:right;border:1px #444444 solid;border-radius: 5px;padding:2px;">
 			    <c:choose>
 			    	<c:when test="${var.STATE eq 0}">待付款</c:when>
-			    	<c:when test="${var.STATE eq 1}">已支付</c:when>
+			    	<c:when test="${var.STATE eq 1}">待确认</c:when>
 			    	<c:when test="${var.STATE eq 2}">待使用</c:when>
-			    	<c:when test="${var.STATE eq 3}">已使用</c:when>
+			    	<c:when test="${var.STATE eq 3}">待评价</c:when>
 			    	<c:when test="${var.STATE eq 5}">已退款</c:when>
+			    	<c:when test="${var.STATE eq 4}">已评价</c:when>
+			    	<c:when test="${var.STATE eq 10}">待发货</c:when>
+			    	<c:when test="${var.STATE eq 11}">待收货</c:when>
+			    	<c:when test="${var.STATE eq 12}">待签收</c:when>
 			    	<c:otherwise>未知</c:otherwise>
 			    </c:choose>
 			    </span></div>
@@ -66,6 +71,9 @@
 			      	</c:when>
 			      	<c:when test="${var.STATE eq 1 }">
 			      	<button onclick="goUseInfo('${var.ORDER_ID}');" class="button button-fill button-warning" style="background:#FFCC01;color:#000000;">确认信息</button>
+			      	</c:when>
+			      	<c:when test="${var.STATE eq 3 }">
+			      	<button onclick="goRate('${var.ORDER_ID}');" class="button button-fill button-warning" style="background:#FFCC01;color:#000000;">立即评价</button>
 			      	</c:when>
 			      	<c:otherwise>
 			      	<button onclick="goInfo('${var.ORDER_ID}');" class="button button-fill button-warning" style="background:#FFCC01;color:#000000;">查看详情</button>
@@ -142,7 +150,7 @@
 		      </div>
 		      <div id="tab4" class="tab">
 				<c:forEach var="var" items="${ordersData}">
-				<c:if test="${var.STATE eq 3}">
+				<c:if test="${var.STATE eq 11}">
 				<div class="card">
 			    <div class="card-header">下单时间:${var.CDT}</div>
 			    <div class="card-content">
@@ -172,6 +180,36 @@
 			  </c:if>
 			</c:forEach>
 		      </div>
+		      <div id="tab5" class="tab">
+				<c:forEach var="var" items="${ordersData}">
+				<c:if test="${var.STATE eq 3}">
+				<div class="card">
+			    <div class="card-header">下单时间:${var.CDT}</div>
+			    <div class="card-content">
+			      <div class="list-block media-list">
+			        <ul>
+			          <li class="item-content">
+			            <div class="item-media">
+			              <img src="<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}" width="100">
+			            </div>
+			            <div class="item-inner">
+			              <div class="item-title-row">
+			                <div class="item-title">${var.GOODSDESC}</div>
+			              </div>
+			              <div class="item-subtitle">总价:${var.MONEY}<span style="float:right;">数量:${var.NUMBER}</span></div>
+			            </div>
+			          </li>
+			        </ul>
+			      </div>
+			    </div>
+			    <div class="card-footer">
+			      <span></span>
+			      <span><button onclick="goInfo('${var.ORDER_ID}');" class="button" style="background:#FFCC01;color:#000000;display:inline;margin-right:10px;">立即评价</button><button onclick="goRate('${var.ORDER_ID}');" class="button" style="background:#FFCC01;color:#000000;display:inline;">查看详情</button></span>
+			    </div>
+			  </div>
+			  </c:if>
+			</c:forEach>
+		      </div>
 		    </div>
 				</div>
 			</div>
@@ -184,8 +222,11 @@
   	function goInfo(id){
 		 location.href="<%=request.getContextPath()%>/orders/info?ORDER_ID="+id
 	}
+    function goRate(id){
+		 location.href="<%=request.getContextPath()%>/orders/rate?ORDER_ID="+id
+	}
   	function goPay(id,sn,original,derate,money){
-  		 wx.miniProgram.navigateTo({
+  		 tt.miniProgram.navigateTo({
            url: '/pages/pay/pay?type=goods&id='+id+'&sn='+sn+'&original='+original+'&derate='+derate+'&money='+money
       	})
   	}
