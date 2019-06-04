@@ -1,6 +1,7 @@
 package com.ffw.app.dy.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -14,6 +15,7 @@ import com.ffw.api.model.PageData;
 import com.ffw.api.util.DateUtil;
 import com.ffw.app.dy.constant.IConstant;
 import com.ffw.app.dy.model.ReturnModel;
+import com.ffw.app.dy.util.JSSDKUtil;
 import com.ffw.app.dy.util.RestTemplateUtil;
 
 @Controller
@@ -115,6 +117,10 @@ public class SellerController extends BaseController {
 				new ParameterizedTypeReference<List<PageData>>() {
 				});
 		mv.addObject("standData", standData);
+
+		Map<String, String> config = JSSDKUtil
+				.config("https://fanfan.skyable.cn/app/seller/manage?SHOP_ID=" + pd.getString("SHOP_ID"));
+		mv.addObject("config", config);
 
 		mv.setViewName("seller/manage");
 		return mv;
