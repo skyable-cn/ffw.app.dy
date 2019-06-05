@@ -103,6 +103,7 @@
 		     <span class="icon"><img src="<%=request.getContextPath()%>/static/icon/index.png"/></span>
 		     <span class="tab-label">首页</span>
 		    </a>
+		    <a class="tab-item external" href="javascript:shareGoods();">分享抖音</a>
 		    <a class="tab-item external" style="background:#FFCC01;color:#000000;" href="<%=request.getContextPath()%>/goBuy?GOODS_ID=${pd.GOODS_ID}&FROMWXOPEN_ID=${FROMWXOPEN_ID}">立即购买</a>
 		  </div>
 		</nav>
@@ -121,5 +122,10 @@
             url: '/pages/position/position?latitude=${shop.LATITUDE}&longitude=${shop.LONGITUDE}&address=${shop.SHOPADDRESS}'
        })
   	}
+  	function shareGoods(){
+ 		 tt.miniProgram.navigateTo({
+            url: '/pages/share/share?type=goods&fromopenid=${USER_SESSION.WXOPEN_ID}&image=${pd.FILEPATH1}&datakey=${pd.GOODS_ID}&title=产品推广宣传'
+       })
+ 	}
   </script>
 </html>

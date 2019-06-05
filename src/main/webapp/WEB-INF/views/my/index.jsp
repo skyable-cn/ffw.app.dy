@@ -50,6 +50,7 @@
 			<div class="row">
 				<div class="col-100" style="padding:10px;">
 			<div class="div_height2" style="background:#ffffff;left:10px;right:10px;border-radius: 5px;border:1px #EEEEEE solid;-webkit-box-shadow: 3px 3px 12px #666;-moz-box-shadow: 3px 3px 12px #666;box-shadow: 3px 3px 12px #666; -moz-border-radius: 5px;-webkit-border-radius: 5px;">
+					 <a class="external" href="<%=request.getContextPath()%>/my/account">
 					 <div class="row">
 					 	<div class="col-50" style="text-align:left;padding:20px 15px;">
 					 		我的钱包
@@ -58,12 +59,14 @@
 					 		&gt;
 					 	</div>
 					 </div>
+					 </a>
 					 	 <div class="row">
 					 	<div class="col-100" style="padding:0 10px;">
 					 		<div style="width:100%;height:1px;background:#EEEEEE;">&nbsp;</div>
 					 	</div>
 					 </div>
-					 <a class="external" href="<%=request.getContextPath()%>/seller/list"><div class="row">
+					 <a class="external" href="<%=request.getContextPath()%>/seller/list">
+					 <div class="row">
 					 	<div class="col-50" style="text-align:left;padding:20px 15px;">
 					 		商家后台
 					 	</div>

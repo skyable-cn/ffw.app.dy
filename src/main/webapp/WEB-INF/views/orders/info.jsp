@@ -41,7 +41,7 @@
 				</div>
 				<div class="row" style="padding:5px;">
 					<div class="col-100">
-						<div style="text-align:center;">有效期 ${order.STARTTIME}~${order.ENDTIME}</div>
+						<div style="text-align:center;">有效期 ${order.USESTARTTIME}~${order.USEENDTIME}</div>
 					</div>
 				</div>
 				<!-- 

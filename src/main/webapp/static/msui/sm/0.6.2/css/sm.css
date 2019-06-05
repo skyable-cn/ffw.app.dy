@@ -3360,7 +3360,7 @@ html.with-statusbar-overlay .popup.tablet-fullscreen {
   position: relative;
 }
 .card-content-inner {
-  padding: 0.75rem;
+  padding: 0.5rem;
   position: relative;
 }
 .card-content-inner > p:first-child {
