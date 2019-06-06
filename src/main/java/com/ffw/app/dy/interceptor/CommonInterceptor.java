@@ -12,31 +12,27 @@ import com.ffw.app.dy.constant.IConstant;
 public class CommonInterceptor implements HandlerInterceptor {
 
 	@Override
-	public void afterCompletion(HttpServletRequest arg0,
-			HttpServletResponse arg1, Object arg2, Exception arg3)
+	public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
 			throws Exception {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1,
-			Object arg2, ModelAndView arg3) throws Exception {
+	public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
+			throws Exception {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object arg2) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		String path = request.getServletPath();
-		if ("/mini".equals(path) || "/index".equals(path)
-				|| "/wxNotify".equals(path)) {
+		if ("/mini".equals(path) || "/index".equals(path) || "/dyNotify".equals(path)) {
 			return true;
 		}
 
-		PageData user = (PageData) request.getSession().getAttribute(
-				IConstant.USER_SESSION);
+		PageData user = (PageData) request.getSession().getAttribute(IConstant.USER_SESSION);
 		if (user != null) {
 			return true;
 		} else {

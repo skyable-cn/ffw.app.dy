@@ -16,6 +16,7 @@
     <div class="page-group">
         <div class="page page-current">
 			<div class="content">
+			<c:if test="${fn:length(shopData) ne 0}">
 			<div class="list-block" style="margin-top:0px;margin-bottom:0px;">
 			 <ul>
 			 <c:forEach var="var" items="${shopData}">
@@ -28,13 +29,14 @@
 		      </c:forEach>
 		      </ul>
 		      </div>
-		      <!-- 
+		      </c:if>
+		      <c:if test="${fn:length(shopData) eq 0}">
 		      <div class="row" style="padding:5px;">
    					<div class="col-100">
-   					<a href="<%=request.getContextPath()%>/seller"  class="external button button-big button-fill button-success" style="background:#FFCC01;color:#000000;">新增商户</a>
+   					<a href="javascript:;"  class="external button button-big button-fill button-success" style="background:#FFCC01;color:#000000;">暂无签约合作的商户</a>
    					</div>
    				</div>
-   			 -->
+   			 </c:if>
 			</div>
         </div>
     </div>
