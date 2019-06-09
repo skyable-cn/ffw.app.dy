@@ -117,6 +117,28 @@
           </div>
         </div>
       </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-name"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">有效期</div>
+            <div class="item-input">
+              <input id="SHOPNAME1" name="USETIME1" type="text" placeholder="" value="${order.USESTARTTIME}" disabled="disabled">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-name"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">&nbsp;</div>
+            <div class="item-input">
+              <input id="SHOPNAME2" name="USETIME2" type="text" placeholder="" value="${order.USEENDTIME}" disabled="disabled">
+            </div>
+          </div>
+        </div>
+      </li>
       <c:if test="${order.STATE eq 3}">
       <li>
         <div class="item-content">
