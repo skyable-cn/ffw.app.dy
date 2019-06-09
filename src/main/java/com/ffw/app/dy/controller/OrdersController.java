@@ -462,7 +462,7 @@ public class OrdersController extends BaseController {
 	}
 
 	@RequestMapping(value = { "/orders/verification" })
-	public ModelAndView use() {
+	public ModelAndView use() throws Exception {
 		logger.info("进入订单核销确认");
 		ModelAndView mv = new ModelAndView();
 		PageData pd = new PageData();
@@ -484,6 +484,18 @@ public class OrdersController extends BaseController {
 				&& !pd.getString("USEKEY").equals(DigestUtils.md5Hex(order.getString("USEKEY") + IConstant.KEY_SLAT))) {
 			order = null;
 		}
+
+		boolean useTimeFlag = false;
+		if (null != order) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Long start = sdf.parse(order.getString("USESTARTTIME")).getTime();
+			Long end = sdf.parse(order.getString("USEENDTIME")).getTime();
+			Long now = new Date().getTime();
+			if (now >= start && now <= end) {
+				useTimeFlag = true;
+			}
+		}
+		mv.addObject("useTimeFlag", useTimeFlag);
 		mv.addObject("order", order);
 		mv.setViewName("orders/verification");
 		return mv;

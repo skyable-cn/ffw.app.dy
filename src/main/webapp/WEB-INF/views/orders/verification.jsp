@@ -153,6 +153,10 @@
 	  $.toast("该订单已核销");
   }
   function save(){
+	  if("${useTimeFlag}"=="false"){
+		  $.alert("核销规则","该订单已过期,现已无法核销"); 
+		  return;
+	  }
 	  $.ajax({
 			type: "POST",
 			url: '<%=request.getContextPath()%>/orders/verification/save',
