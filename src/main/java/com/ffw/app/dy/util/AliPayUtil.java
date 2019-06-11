@@ -1,5 +1,7 @@
 package com.ffw.app.dy.util;
 
+import java.util.Random;
+
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -22,12 +24,12 @@ public class AliPayUtil {
 		AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
 		model.setBody("我是测试数据");
 		model.setSubject("App支付测试Java");
-		model.setOutTradeNo("20120611222334");
+		model.setOutTradeNo("20120611222334" + new Random().nextInt(10000));
 		model.setTimeoutExpress("30m");
 		model.setTotalAmount("0.01");
 		model.setProductCode("QUICK_MSECURITY_PAY");
 		request.setBizModel(model);
-		request.setNotifyUrl("商户外网可以访问的异步地址");
+		request.setNotifyUrl("https://fanfan.skyable.cn/appdy/dyNotify");
 		try {
 			// 这里和普通的接口调用不同，使用的是sdkExecute
 			AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);
