@@ -26,6 +26,7 @@ import com.ffw.api.util.DateUtil;
 import com.ffw.api.util.DoubleUtil;
 import com.ffw.app.dy.config.FileConfig;
 import com.ffw.app.dy.constant.IConstant;
+import com.ffw.app.dy.util.AliPayUtil;
 import com.ffw.app.dy.util.HttpUtils;
 import com.ffw.app.dy.util.RestTemplateUtil;
 import com.github.wxpay.sdk.WXPayUtil;
@@ -153,6 +154,8 @@ public class PayController extends BaseController {
 		p0 = URLEncoder.encode(p0, "utf-8").replaceAll("%3D", "=").replaceAll("%26", "&");
 
 		p0 = p0.replace("sign_type", "sign=" + r_sign + "&sign_type");
+
+		p0 = AliPayUtil.getUrl();
 
 		System.err.println("支付宝URL:" + p0);
 
