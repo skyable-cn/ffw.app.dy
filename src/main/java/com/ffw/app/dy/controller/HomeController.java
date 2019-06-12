@@ -22,6 +22,13 @@ public class HomeController extends BaseController {
 		logger.info("进入首页");
 		ModelAndView mv = new ModelAndView();
 
+		if (null == getSession().getAttribute(IConstant.STRING_SHOW_FLAG)) {
+			mv.addObject("showNotice", "yes");
+			getSession().setAttribute(IConstant.STRING_SHOW_FLAG, IConstant.STRING_SHOW_FLAG);
+		} else {
+			mv.addObject("showNotice", "no");
+		}
+
 		mv.setViewName("home/index");
 		mv.addObject("nav", "home");
 		return mv;

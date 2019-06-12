@@ -100,7 +100,7 @@
     					$("#goods").append(html);
     				}
     				
-    				setTimeout(function(){$.hidePreloader();},1000);
+    				setTimeout(function(){$.hidePreloader();if(flag && '${showNotice}' == 'yes'){searchUnRead();}},1000);
     				
     	             loading = false;
     			},
@@ -152,5 +152,75 @@
   		search(true);
     	
   	});
+  	
+  	function searchUnRead(){
+	  	$.ajax({
+			type: "POST",
+			url: '<%=request.getContextPath()%>/notice/listAllUnRead',
+	    	data:{
+					
+	    	},
+	    	async: false,
+			dataType:'json',
+			cache: false,
+			beforeSend:function(){
+	
+			},
+			success: function(data){
+				 showUnRead(data,0);
+			},
+			error:function(){
+				
+			}
+		});
+  	}
+  	
+  	function showUnRead(data,index){
+  		if(index >= data.length){
+  			return;
+  		}
+  		var notice = data[index];
+  		
+  		$.modal({
+  	      title:  '系统消息通知',
+  	      text: notice.NOTICECONTENT,
+  	      buttons: [
+  	        {
+  	          text: '确定',
+  	          onClick: function() {
+  	        	saveNoticeRecord(notice.NOTICE_ID);setTimeout(function(){showUnRead(data,(index+1))},3000);
+  	          }
+  	        },
+  	        {
+  	          text: '取消',
+  	          onClick: function() {
+  	        	setTimeout(function(){showUnRead(data,(index+1))},3000);
+  	          }
+  	        }
+  	      ]
+  	    });
+  	}
+  	
+  	function saveNoticeRecord(id){
+  		$.ajax({
+			type: "POST",
+			url: '<%=request.getContextPath()%>/notice/saveRecord',
+	    	data:{
+				"NOTICE_ID":id	
+	    	},
+	    	async: false,
+			dataType:'json',
+			cache: false,
+			beforeSend:function(){
+	
+			},
+			success: function(data){
+				 
+			},
+			error:function(){
+				
+			}
+		});
+  	}
   </script>
 </html>
