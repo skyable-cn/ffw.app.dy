@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ffw.api.model.PageData;
+import com.ffw.api.util.DateUtil;
 import com.ffw.app.dy.config.ToutiaoMiniConfig;
 import com.ffw.app.dy.constant.IConstant;
 import com.ffw.app.dy.model.ReturnModel;
@@ -60,7 +61,7 @@ public class ToutiaoController extends BaseController {
 			if (null == pd.get("FROMWXOPEN_ID") || pd.getString("FROMWXOPEN_ID").equals("null")) {
 				pd.remove("FROMWXOPEN_ID");
 			}
-
+			pd.put("CDT", DateUtil.getTime());
 			rest.post(IConstant.FFW_SERVICE_KEY, "member/save", pd, PageData.class);
 		} else {
 			pdm.put("NICKNAME", pd.getString("NICKNAME"));
