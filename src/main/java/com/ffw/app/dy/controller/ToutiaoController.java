@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ffw.api.model.PageData;
 import com.ffw.api.util.DateUtil;
-import com.ffw.app.dy.config.ToutiaoMiniConfig;
 import com.ffw.app.dy.constant.IConstant;
 import com.ffw.app.dy.model.ReturnModel;
 import com.ffw.app.dy.util.HttpUtils;
@@ -18,9 +17,6 @@ import net.sf.json.JSONObject;
 
 @Controller
 public class ToutiaoController extends BaseController {
-
-	@Autowired
-	ToutiaoMiniConfig toutiaoMiniConfig;
 
 	@Autowired
 	RestTemplateUtil rest;
@@ -33,9 +29,14 @@ public class ToutiaoController extends BaseController {
 		pd = this.getPageData();
 		String str = null;
 		try {
+
+			PageData market = new PageData();
+			market.put("MARKET_ID", pd.getString("MARKET_ID"));
+			market = rest.post(IConstant.FFW_SERVICE_KEY, "market/find", market, PageData.class);
+
 			str = HttpUtils
-					.get("https://developer.toutiao.com/api/apps/jscode2session?appid=" + toutiaoMiniConfig.getAppid()
-							+ "&secret=" + toutiaoMiniConfig.getAppsecret() + "&code=" + pd.getString("CODE"));
+					.get("https://developer.toutiao.com/api/apps/jscode2session?appid=" + market.getString("DYAPPID")
+							+ "&secret=" + market.getString("DYAPPSECRET") + "&code=" + pd.getString("CODE"));
 		} catch (Exception e) {
 
 		}
