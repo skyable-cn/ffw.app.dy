@@ -39,7 +39,7 @@
 				      </div>
 				    </div>
 				    <div class="card-footer">
-				      <span>已售${pd.BUYNUMBER}份</span>
+				      <span>已售${pd.VIRTUALSELLED}份</span>
 				      <span>库存${pd.STORE}份</span>
 				    </div>
 				  </div>

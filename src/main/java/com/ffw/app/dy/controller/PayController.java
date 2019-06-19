@@ -286,6 +286,8 @@ public class PayController extends BaseController {
 
 				pdgoods.put("BUYNUMBER",
 						Integer.parseInt(pdgoods.getString("BUYNUMBER")) + Integer.parseInt(pd.getString("NUMBER")));
+				pdgoods.put("VIRTUALSELLED", Integer.parseInt(pdgoods.getString("VIRTUALSELLED"))
+						+ Integer.parseInt(pd.getString("NUMBER")));
 				rest.post(IConstant.FFW_SERVICE_KEY, "goods/edit", pdgoods, PageData.class);
 
 				PageData pdmember = new PageData();

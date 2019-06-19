@@ -151,6 +151,7 @@ public class OrdersController extends BaseController {
 			pdg.put("GOODS_ID", GOODS_ID);
 			pdg = rest.post(IConstant.FFW_SERVICE_KEY, "goods/find", pdg, PageData.class);
 			pdg.put("BUYNUMBER", Integer.parseInt(pdg.getString("BUYNUMBER")) + Integer.parseInt(NUMBER));
+			pdg.put("VIRTUALSELLED", Integer.parseInt(pdg.getString("VIRTUALSELLED")) + Integer.parseInt(NUMBER));
 			rest.post(IConstant.FFW_SERVICE_KEY, "goods/edit", pdg, PageData.class);
 
 		}

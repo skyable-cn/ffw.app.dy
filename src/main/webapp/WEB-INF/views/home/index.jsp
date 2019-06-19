@@ -87,7 +87,7 @@
   				    </div>
   				  <div class="card-footer">
 			      <span class="delete">原价 `+value.ORIGINALMONEY+`元</span>
-			      <span>已售`+value.BUYNUMBER+`份</span>
+			      <span>已售`+value.VIRTUALSELLED+`份</span>
 			    </div>
     				  </div>
     				  </div>
