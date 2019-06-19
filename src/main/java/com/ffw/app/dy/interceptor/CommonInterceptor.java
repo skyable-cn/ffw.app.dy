@@ -28,7 +28,8 @@ public class CommonInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		String path = request.getServletPath();
-		if ("/mini".equals(path) || "/index".equals(path) || "/dyNotify".equals(path)) {
+		if ("/toutiao/user".equals(path) || "/system/init".equals(path) || "/mini".equals(path) || "/index".equals(path)
+				|| "/dyNotify".equals(path)) {
 			return true;
 		}
 
