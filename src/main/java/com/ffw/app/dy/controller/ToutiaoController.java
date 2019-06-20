@@ -1,12 +1,5 @@
 package com.ffw.app.dy.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -91,37 +84,6 @@ public class ToutiaoController extends BaseController {
 			rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdm, PageData.class);
 		}
 		return new ReturnModel();
-	}
-
-	@RequestMapping("/logo")
-	public void logo(HttpServletRequest request, HttpServletResponse response) {
-		PageData pd = new PageData();
-		pd = this.getPageData();
-		PageData market = new PageData();
-		market.put("MARKET_ID", pd.getString("MARKET_ID"));
-		market = rest.post(IConstant.FFW_SERVICE_KEY, "market/find", market, PageData.class);
-		String fileName = market.getString("FILEPATH1");
-		if (StringUtils.isNotEmpty(fileName)) {
-			File file = new File(fileConfig.getDirImage() + File.separator + fileName);
-			if (file.exists()) {
-				response.reset();
-				response.setContentType("image/png");
-				response.setHeader("Content-Type", "application/octet-stream");
-				response.setHeader("Content-Disposition", "attachment;filename=" + fileName + ".png");
-				try {
-					InputStream in = new FileInputStream(file);
-					byte[] bytearray = new byte[1024];
-					int len = 0;
-					while ((len = in.read(bytearray)) != -1) {
-						response.getOutputStream().write(bytearray);
-					}
-					response.getOutputStream().flush();
-					in.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 
 }
