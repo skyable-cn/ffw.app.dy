@@ -124,6 +124,84 @@
   <%@ include file="../common/headjs.jsp"%>
   <script type="text/javascript">
 
+	  var startx, starty;
+	  //获得角度
+	  function getAngle(angx, angy) {
+		  return Math.atan2(angy, angx) * 180 / Math.PI;
+	  };
+
+	  //根据起点终点返回方向 1向上 2向下 3向左 4向右 0未滑动
+	  function getDirection(startx, starty, endx, endy) {
+		  var angx = endx - startx;
+		  var angy = endy - starty;
+		  var result = 0;
+
+		  //如果滑动距离太短
+		  if (Math.abs(angx) < 2 && Math.abs(angy) < 2) {
+			  return result;
+		  }
+
+		  var angle = getAngle(angx, angy);
+		  if (angle >= -135 && angle <= -45) {
+			  result = 1;
+		  } else if (angle > 45 && angle < 135) {
+			  result = 2;
+		  } else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) {
+			  result = 3;
+		  } else if (angle >= -45 && angle <= 45) {
+			  result = 4;
+		  }
+
+		  return result;
+	  }
+	  //手指接触屏幕
+	  document.addEventListener("touchstart", function(e) {
+		  startx = e.touches[0].pageX;
+		  starty = e.touches[0].pageY;
+	  }, false);
+	  //手指离开屏幕
+
+	  document.addEventListener("touchend", function(e) {
+		  var endx, endy;
+		  endx = e.changedTouches[0].pageX;
+		  endy = e.changedTouches[0].pageY;
+		  var direction = getDirection(startx, starty, endx, endy);
+		  var ss=$("#roll_top").offset().top;
+		  var ss1=$("#roll_top1").offset().top;
+
+		  switch (direction) {
+			  case 0:
+				  break;
+			  case 1:
+				  if(ss>=200){
+					  // 向上滑动，图1高亮
+					  $("#roll2").removeClass("active");
+					  $("#roll1").addClass("tab-link active button");
+				  }
+				  if(ss<=199&&ss1>=120){
+					  // 向上滑动，图2高亮
+					  $("#roll1").removeClass("active");
+					  $("#roll2").addClass("tab-link active button");
+				  }
+
+				  break;
+			  case 2:
+				  if(ss>=200){
+					  // 向上滑动，图1高亮
+					  $("#roll2").removeClass("active");
+					  $("#roll1").addClass("tab-link active button");
+				  }
+				  if(ss<=199&&ss1>=120){
+					  // 向上滑动，图2高亮
+					  $("#roll1").removeClass("active");
+					  $("#roll2").addClass("tab-link active button");
+				  }
+
+				  break;
+			  default:
+		  }
+	  }, false);
+
 	  $(document).ready(function() {
 		  document.querySelector("#roll1").onclick = function(){
 			  document.querySelector("#roll_top").scrollIntoView(true);
@@ -131,7 +209,6 @@
 			  // document.querySelector("#roll_top2").scrollIntoView(false);
 			  $("#roll2").removeClass("active");
 			  $("#roll1").addClass("tab-link active button");
-			  console.log($("roll1"));
 
 		  }
 		  document.querySelector("#roll2").onclick = function(){
