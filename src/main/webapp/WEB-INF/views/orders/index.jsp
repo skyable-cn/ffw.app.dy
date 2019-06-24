@@ -237,6 +237,10 @@
 						})
 						
 					}
+				}else{
+					$.alert(data.message,function(){
+						
+					})
 				}
 			},
 			error:function(){
