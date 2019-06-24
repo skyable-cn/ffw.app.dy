@@ -16,13 +16,21 @@
     <div class="page-group">
         <div class="page page-current">
 			<div class="content">
-			<c:if test="${fn:length(shopData) ne 0}">
+			<c:if test="${fn:length(shopData) ne 0 or fn:length(shopData1) ne 0}">
 			<div class="list-block" style="margin-top:0px;margin-bottom:0px;">
 			 <ul>
 			 <c:forEach var="var" items="${shopData}">
 		      <li class="item-content item-link" onclick="goShop('${var.SHOP_ID}','${var.SHOPSTATENAME}')">
 		        <div class="item-inner">
-		          <div class="item-title">${var.SHOPNAME}</div>
+		          <div class="item-title">${var.SHOPNAME}&nbsp;<strong>[店主]</strong></div>
+		          <div class="item-after">${var.SHOPSTATENAME}</div>
+		        </div>
+		      </li>
+		      </c:forEach>
+		      <c:forEach var="var" items="${shopData1}">
+		      <li class="item-content item-link" onclick="goShop('${var.SHOP_ID}','${var.SHOPSTATENAME}')">
+		        <div class="item-inner">
+		          <div class="item-title">${var.SHOPNAME}&nbsp;<strong>[店员]</strong></div>
 		          <div class="item-after">${var.SHOPSTATENAME}</div>
 		        </div>
 		      </li>
@@ -30,7 +38,7 @@
 		      </ul>
 		      </div>
 		      </c:if>
-		      <c:if test="${fn:length(shopData) eq 0}">
+		      <c:if test="${fn:length(shopData) eq 0 and fn:length(shopData1) eq 0}">
 		      <div class="row" style="padding:5px;">
    					<div class="col-100">
    					<a href="javascript:;"  class="external button button-big button-fill button-success" style="background:#FFCC01;color:#000000;">暂无签约合作的商户</a>
