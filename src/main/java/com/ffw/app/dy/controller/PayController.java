@@ -300,6 +300,11 @@ public class PayController extends BaseController {
 						Integer.parseInt(pdgoods.getString("BUYNUMBER")) + Integer.parseInt(pd.getString("NUMBER")));
 				pdgoods.put("VIRTUALSELLED", Integer.parseInt(pdgoods.getString("VIRTUALSELLED"))
 						+ Integer.parseInt(pd.getString("NUMBER")));
+				pdgoods.put("STORE",
+						Integer.parseInt(pdgoods.getString("STORE")) - Integer.parseInt(pd.getString("NUMBER")));
+				if (Integer.parseInt(pdgoods.getString("STORE")) - Integer.parseInt(pd.getString("NUMBER")) <= 0) {
+					pdgoods.put("STATE", IConstant.STRING_2);
+				}
 				rest.post(IConstant.FFW_SERVICE_KEY, "goods/edit", pdgoods, PageData.class);
 
 				PageData pdmember = new PageData();
