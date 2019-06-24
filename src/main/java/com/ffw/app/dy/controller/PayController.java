@@ -71,11 +71,26 @@ public class PayController extends BaseController {
 		String SUBJECT = "字节跳动小程序在线支付";
 		String BODYDESC = null;
 
+		// 返回给小程序端需要的参数
+		Map<String, String> response = new HashMap<String, String>();
+
 		String type = pd.getString("TYPE");
 
 		if ("goods".equals(type)) {
 			pd.put("ORDER_ID", pd.getString("ID"));
 			pd = rest.post(IConstant.FFW_SERVICE_KEY, "orders/find", pd, PageData.class);
+
+			PageData pdtest = new PageData();
+			pdtest.put("GOODS_ID", pd.getString("GOODS_ID"));
+			pdtest = rest.post(IConstant.FFW_SERVICE_KEY, "goods/find", pdtest, PageData.class);
+
+			if (!IConstant.STRING_1.equals(pdtest.getString("STATE"))
+					|| Integer.parseInt(pdtest.getString("STORE")) - Integer.parseInt(pd.getString("NUMBER")) < 0) {
+				response.put("STATEFLAG", "NO");
+				response.put("STATEMESSAGE", "产品售卖标识异常");
+				return response;
+			}
+
 			SNID = pd.getString("ORDERSN");
 			BODYDESC = "饭饭网产品消费";
 		} else if ("product".equals(type)) {
@@ -86,9 +101,6 @@ public class PayController extends BaseController {
 		} else {
 
 		}
-
-		// 返回给小程序端需要的参数
-		Map<String, String> response = new HashMap<String, String>();
 
 		if (null == pd) {
 			response.put("STATEFLAG", "NO");
