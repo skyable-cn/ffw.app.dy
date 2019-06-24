@@ -327,8 +327,8 @@ public class PayController extends BaseController {
 
 					PageData pdwaitaccount = new PageData();
 					pdwaitaccount.put("MEMBER_ID", pd.getString("MEMBER_ID"));
-					String waitaccount = String.valueOf(
-							Double.parseDouble(pdmember.getString("WAITACCOUNT")) + Double.parseDouble(GIVEMONEY));
+					String waitaccount = String.valueOf(DoubleUtil
+							.sum(Double.parseDouble(pdmember.getString("WAITACCOUNT")), Double.parseDouble(GIVEMONEY)));
 					pdwaitaccount.put("WAITACCOUNT", waitaccount);
 					rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount, PageData.class);
 
@@ -348,8 +348,8 @@ public class PayController extends BaseController {
 
 					PageData pdwaitaccount = new PageData();
 					pdwaitaccount.put("MEMBER_ID", pd.getString("MEMBER_ID"));
-					String waitaccount = String.valueOf(
-							Double.parseDouble(pdmember.getString("WAITACCOUNT")) + Double.parseDouble(GIVEMONEY));
+					String waitaccount = String.valueOf(DoubleUtil
+							.sum(Double.parseDouble(pdmember.getString("WAITACCOUNT")), Double.parseDouble(GIVEMONEY)));
 					pdwaitaccount.put("WAITACCOUNT", waitaccount);
 					rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount, PageData.class);
 				} else {
@@ -380,8 +380,8 @@ public class PayController extends BaseController {
 
 					PageData pdwaitaccount0 = new PageData();
 					pdwaitaccount0.put("MEMBER_ID", pdmember0.getString("MEMBER_ID"));
-					String waitaccount = String.valueOf(
-							Double.parseDouble(pdmember0.getString("WAITACCOUNT")) + Double.parseDouble(GIVEMONEY0));
+					String waitaccount = String.valueOf(DoubleUtil.sum(
+							Double.parseDouble(pdmember0.getString("WAITACCOUNT")), Double.parseDouble(GIVEMONEY0)));
 					pdwaitaccount0.put("WAITACCOUNT", waitaccount);
 					rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount0, PageData.class);
 

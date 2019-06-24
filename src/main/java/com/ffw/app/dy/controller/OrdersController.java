@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.ffw.api.model.PageData;
 import com.ffw.api.util.DateUtil;
+import com.ffw.api.util.DoubleUtil;
 import com.ffw.app.dy.config.FileConfig;
 import com.ffw.app.dy.constant.IConstant;
 import com.ffw.app.dy.model.ReturnModel;
@@ -562,12 +563,21 @@ public class OrdersController extends BaseController {
 		shop.put("SHOP_ID", pd.getString("SHOP_ID"));
 		shop = rest.post(IConstant.FFW_SERVICE_KEY, "shop/find", shop, PageData.class);
 
+		PageData market = new PageData();
+		market.put("MARKET_ID", shop.getString("MARKET_ID"));
+		market = rest.post(IConstant.FFW_SERVICE_KEY, "market/find", market, PageData.class);
+
+		PageData domain = new PageData();
+		domain.put("DOMAIN_ID", market.getString("DOMAIN_ID"));
+		domain = rest.post(IConstant.FFW_SERVICE_KEY, "domain/find", domain, PageData.class);
+
 		PageData pds = new PageData();
 		pds.put("SHOP_ID", pd.getString("SHOP_ID"));
 
+		Double allMoney = Integer.parseInt(pd.getString("NUMBER")) * Double.parseDouble(pd.getString("SELLMONEY"));
 		Double addMoney = Integer.parseInt(pd.getString("NUMBER")) * Double.parseDouble(pd.getString("BALANCEMONEY"));
 
-		pds.put("WAITACCOUNT", Double.parseDouble(shop.getString("WAITACCOUNT")) + addMoney);
+		pds.put("WAITACCOUNT", DoubleUtil.sum(Double.parseDouble(shop.getString("WAITACCOUNT")), addMoney));
 		rest.post(IConstant.FFW_SERVICE_KEY, "shop/edit", pds, PageData.class);
 
 		PageData pdst = new PageData();
@@ -575,6 +585,42 @@ public class OrdersController extends BaseController {
 		pdst.put("SETTLEMONEY", String.valueOf(addMoney));
 		pdst.put("CDT", DateUtil.getTime());
 		rest.post(IConstant.FFW_SERVICE_KEY, "settle/save", pdst, PageData.class);
+
+		PageData pdshop = new PageData();
+		pdshop.put("ORDER_ID", pd.getString("ORDER_ID"));
+		pdshop.put("DM_ID", shop.getString("SHOP_ID"));
+		pdshop.put("DM_TYPE", "shop");
+		pdshop.put("INCOMEMONEY", allMoney);
+		pdshop.put("PROFITMONEY", addMoney);
+		pdshop.put("SERVICEMONEY", DoubleUtil.sub(allMoney, addMoney));
+		pdshop.put("CLASS", IConstant.STRING_CLASS_DY);
+		pdshop.put("CDT", DateUtil.getTime());
+		rest.post(IConstant.FFW_SERVICE_KEY, "deduct/save", pdshop, PageData.class);
+
+		PageData pdmarket = new PageData();
+		pdmarket.put("ORDER_ID", pd.getString("ORDER_ID"));
+		pdmarket.put("DM_ID", market.getString("MARKET_ID"));
+		pdmarket.put("DM_TYPE", "market");
+		pdmarket.put("INCOMEMONEY", allMoney);
+		pdmarket.put("PROFITMONEY", DoubleUtil.sub(allMoney, addMoney));
+		pdmarket.put("SERVICEMONEY",
+				DoubleUtil.sub(allMoney, addMoney) * Double.parseDouble(market.getString("PERCENT")));
+		pdmarket.put("CLASS", IConstant.STRING_CLASS_DY);
+		pdmarket.put("CDT", DateUtil.getTime());
+		rest.post(IConstant.FFW_SERVICE_KEY, "deduct/save", pdmarket, PageData.class);
+
+		PageData pddomain = new PageData();
+		pddomain.put("ORDER_ID", pd.getString("ORDER_ID"));
+		pddomain.put("DM_ID", domain.getString("DOMAIN_ID"));
+		pddomain.put("DM_TYPE", "domain");
+		pddomain.put("INCOMEMONEY", allMoney);
+		pddomain.put("PROFITMONEY",
+				DoubleUtil.sub(allMoney, addMoney) * Double.parseDouble(market.getString("PERCENT")));
+		pddomain.put("SERVICEMONEY",
+				DoubleUtil.sub(allMoney, addMoney) * Double.parseDouble(domain.getString("PERCENT")));
+		pddomain.put("CLASS", IConstant.STRING_CLASS_DY);
+		pddomain.put("CDT", DateUtil.getTime());
+		rest.post(IConstant.FFW_SERVICE_KEY, "deduct/save", pddomain, PageData.class);
 
 		rm.setFlag(true);
 		rm.setData(pd);
