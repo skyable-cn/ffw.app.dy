@@ -1,7 +1,5 @@
 package com.ffw.app.dy.util;
 
-import java.util.Random;
-
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -10,7 +8,7 @@ import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
 
 public class AliPayUtil {
-	public static String getUrl() {
+	public static String getUrl(String subject,String body,String snid,String money) {
 		String result = null;
 		// 实例化客户端
 		// AlipayClient alipayClient = new
@@ -29,11 +27,11 @@ public class AliPayUtil {
 		AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
 		// SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
 		AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
-		model.setBody("我是测试数据");
-		model.setSubject("App支付测试Java");
-		model.setOutTradeNo("20120611222334" + new Random().nextInt(10000));
-		model.setTimeoutExpress("30m");
-		model.setTotalAmount("0.01");
+		model.setSubject(subject);
+		model.setBody(body);
+		model.setOutTradeNo(snid);
+		model.setTimeoutExpress("5d");
+		model.setTotalAmount(money);
 		model.setProductCode("QUICK_MSECURITY_PAY");
 		request.setBizModel(model);
 		request.setNotifyUrl("https://fanfan.skyable.cn/appdy/dyNotify");

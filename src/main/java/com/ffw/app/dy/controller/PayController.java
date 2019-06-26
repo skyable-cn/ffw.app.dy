@@ -114,7 +114,8 @@ public class PayController extends BaseController {
 			return response;
 		}
 
-		String fee = String.valueOf(Float.parseFloat(pd.getString("MONEY")) * 100);
+		String MONEY = pd.getString("MONEY");
+		String fee = String.valueOf(Float.parseFloat(MONEY) * 100);
 		fee = fee.substring(0, fee.indexOf(".")) + "";
 
 		// 获取客户端的ip地址
@@ -167,7 +168,7 @@ public class PayController extends BaseController {
 
 		p0 = p0.replace("sign_type", "sign=" + r_sign + "&sign_type");
 
-		p0 = AliPayUtil.getUrl();
+		p0 = AliPayUtil.getUrl(SUBJECT,BODYDESC,SNID,MONEY);
 
 		System.err.println("支付宝URL:" + p0);
 
