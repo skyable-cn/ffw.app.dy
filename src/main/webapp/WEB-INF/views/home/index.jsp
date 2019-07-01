@@ -72,8 +72,22 @@
     				      <img class='card-cover' style="width:100%;" height="200" src="<%=request.getContextPath()%>/file/image?FILENAME=`+value.FILEPATH+`" alt="">
     				    </div></a>
     				    <div class="card-footer">
-	  				      <span>`+value.SHOPNAME+`</span>
-	  				      <span>`+value.SHOPADDRESS+`</span>
+	  				      <span>`;
+
+						if(value.SHOPNAME.length>7){
+							var shoplength=value.SHOPNAME.slice(0,5)+"..";
+							html +=shoplength;
+						}else{
+							html +=value.SHOPNAME;
+						}
+						html += `</span><span>`
+						if(value.SHOPADDRESS.length>7){
+							var shoplength1=value.SHOPADDRESS.slice(0,5)+"..";
+							html += shoplength1;
+						}else{
+							html += value.SHOPADDRESS;
+						}
+						html += `</span>
 	  				    </div>
     				    <div class="card-content">
     				      <div class="card-content-inner">
