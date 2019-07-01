@@ -65,7 +65,7 @@
 					</c:forEach>
 				</div>
 			</div>
-			<div style="width:100%;height:5px;background:#F2F2F2;margin: 10px 0">&nbsp;</div>
+			<div style="width:100%;height:5px;margin: 10px 0" class="grayBox">&nbsp;</div>
 			<div class="row" style="padding:10px;">
 				<div class="col-60">
 					<p style="margin:0px;" class="bigFontSize">${shop.SHOPNAME}</p>
@@ -73,7 +73,7 @@
 				</div>
 		        <div class="col-40" style="text-align:right;line-height:60px;"><img onclick="phone()" width="20" style="margin-right:15px;" src="<%=request.getContextPath()%>/static/icon/phone.png"/> | <img  onclick="position()" style="margin-left:15px;" width="20" src="<%=request.getContextPath()%>/static/icon/send.png"/></div>
 			</div>
-			<div style="width:100%;height:5px;background:#F2F2F2;margin: 10px 0">&nbsp;</div>
+			<div style="width:100%;height:5px;margin: 10px 0" class="grayBox">&nbsp;</div>
 			<div class="row" style="padding:5px;">
 				<div class="col-100">
 

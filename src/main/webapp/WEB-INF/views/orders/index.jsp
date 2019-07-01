@@ -26,7 +26,7 @@
 					<div>${pd.GOODSDESC}</div>
 					</div>
 				</div>
-				<div style="width:100%;height:10px;background:#dddddd;">&nbsp;</div>
+				<div style="width:100%;height:10px;" class="grayBox">&nbsp;</div>
 				<div class="row" style="padding:10px;padding-top:10px;padding-bottom:10px;">
 					<div class="col-50" style="line-height:50px;">购买数量</div>
 					<div class="col-50"><div style="margin-right:20px;float:right;"><button style="width:35px;margin-right:1px;height:35px;" onclick="computer('-1')">-</button><button style="width:40px;background:#FFFFFF;height:35px;" id="numberButton">1</button><button style="width:35px;margin-left:1px;height:35px;" onclick="computer('1')">+</button></div></div>
@@ -84,7 +84,7 @@
         	  <div style="width:100%;height:5px;background:#dddddd;">&nbsp;</div>
         	  </c:if>
         	   -->
-        	   <div style="width:100%;height:10px;background:#dddddd;">&nbsp;</div>
+        	   <div style="width:100%;height:10px;" class="grayBox">&nbsp;</div>
         	   <div class="list-block" style="margin-top:5px;margin-bottom:2.5rem;">
 		    <ul>
 		      <!-- Text inputs -->
