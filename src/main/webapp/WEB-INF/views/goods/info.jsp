@@ -20,25 +20,25 @@
 			<div class="content">
 			<div class="row" style="padding:5px;">
 				<div class="col-100">
-				<div class="card demo-card-header-pic">
+				<div class="card demo-card-header-pic inFoBox" style="margin-bottom: 0">
 				    <div valign="bottom" class="card-header color-white no-border no-padding">
 				      <img class='card-cover' height="200" width="100%" src="<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}" alt="" onerror="javascript:this.src='<%=request.getContextPath()%>/file/image?FILENAME=${pd.FILEPATH}';">
 				    </div>
-				    <div class="card-footer" style="margin-top:10px;">
+				    <div class="card-footer infoproContentBox" style="margin-top:10px;">
 				      <span>
-				      	<h4 style="margin:0px;"><font style="color:#F40A0B;">${pd.SELLMONEY}元</font></h4>
-				      	<h4 style="margin:0px;margin-top:10px;"class="delete">原价 ${pd.ORIGINALMONEY}元</h4>
+				      	<h4 style="margin:0px;"><font style="color:#F40A0B;" class="bigFontSize">${pd.SELLMONEY}元</font></h4>
+				      	<h4 style="margin:0px;margin-top:10px;font-weight: normal" class="delete deleteColor">原价 ${pd.ORIGINALMONEY}元</h4>
 				      </span>
 				      <span>
-				      	<div id="goods_time_id_${pd.GOODS_ID}_tj_right" class="suspend right">活动结束倒计时<div id="goods_time_id_${pd.GOODS_ID}_tj"><span>0</span>天<span>0</span> <span>0</span> <span>0</span></div></div>
+				      	<div id="goods_time_id_${pd.GOODS_ID}_tj_right" class="suspend right" style="background: #FEE101">活动结束倒计时<div id="goods_time_id_${pd.GOODS_ID}_tj"><span>0</span>天<span>0</span> <span>0</span> <span>0</span></div></div>
 				      </span>
 				    </div>
-				    <div class="card-content">
-				      <div class="card-content-inner">
-				        <p><span style="margin-right:10px;padding:3px 10px;background:#FFCC01;">[${pd.PROVIDE}]提供</span>${pd.GOODSDESC}</p>
+				    <div class="card-content infoproContentBox">
+				      <div class="card-content-inner" style="padding:5px 0 0 0">
+				        <p><span style="margin-right:10px;padding:3px 10px;" class="myColor smFontSize">[${pd.PROVIDE}]提供</span>${pd.GOODSDESC}</p>
 				      </div>
 				    </div>
-				    <div class="card-footer">
+				    <div class="card-footer infoproContentBox" style="border-bottom: solid 1px #DFDFDF;">
 				      <span>已售${pd.VIRTUALSELLED}份</span>
 				      <span>库存${pd.STORE}份</span>
 				    </div>
@@ -46,28 +46,34 @@
 				  <script type="text/javascript">TimeDown("goods_time_id_${pd.GOODS_ID}_tj","${pd.ENDTIME}")</script>
 				</div>
 			</div>
-			<div style="width:100%;height:5px;background:#dddddd;">&nbsp;</div>
 			<div class="row" style="padding:5px;">
-				<div class="col-100" style="font-size:0.85rem;">已抢购用户</div>
+				<div class="col-100" style="font-size: 0.8rem;">已抢购用户</div>
 			</div>
         	<div class="row" style="padding:5px;">
-				
+				<div class="col-80 touxiangImage">
+					<img src="<%=request.getContextPath()%>/static/icon/tx1.jpg"/>
+					<img src="<%=request.getContextPath()%>/static/icon/tx2.jpg"/>
+					<img src="<%=request.getContextPath()%>/static/icon/tx3.jpg"/>
+					<img src="<%=request.getContextPath()%>/static/icon/tx4.jpg"/>
+					<img src="<%=request.getContextPath()%>/static/icon/tx5.jpg"/>
+					<img src="<%=request.getContextPath()%>/static/icon/tx6.jpg"/>
 					<c:if test="${fn:length(peopleDataList) eq 0}">
-						<div class="col-20"><img style="width:50px;border-radius:50%;border:1px #AAAAAA solid;" src="<%=request.getContextPath()%>/static/icon/add.jpg"/></div>
+						<img src="<%=request.getContextPath()%>/static/icon/add.jpg"/>
 					</c:if>
 					<c:forEach var="var" items="${peopleDataList}">
-						<div class="col-20"><img align="middle" style="width:90%;border-radius:50%;margin-bottom:5px;" src="${var.PHOTO}"/></div>
+						<img src="${var.PHOTO}"/>
 					</c:forEach>
+				</div>
 			</div>
-			<div style="width:100%;height:5px;background:#dddddd;">&nbsp;</div>
+			<div style="width:100%;height:5px;background:#F2F2F2;margin: 10px 0">&nbsp;</div>
 			<div class="row" style="padding:10px;">
 				<div class="col-60">
-					<p style="margin:0px;font-size:0.85rem;">${shop.SHOPNAME}</p>
+					<p style="margin:0px;" class="bigFontSize">${shop.SHOPNAME}</p>
 					<p style="margin:0px;margin-top:10px;">${shop.SHOPADDRESS}</p>
 				</div>
 		        <div class="col-40" style="text-align:right;line-height:60px;"><img onclick="phone()" width="20" style="margin-right:15px;" src="<%=request.getContextPath()%>/static/icon/phone.png"/> | <img  onclick="position()" style="margin-left:15px;" width="20" src="<%=request.getContextPath()%>/static/icon/send.png"/></div>
 			</div>
-			<div style="width:100%;height:5px;background:#dddddd;">&nbsp;</div>
+			<div style="width:100%;height:5px;background:#F2F2F2;margin: 10px 0">&nbsp;</div>
 			<div class="row" style="padding:5px;">
 				<div class="col-100">
 
@@ -76,8 +82,8 @@
 						<%--<button id="roll1">商家信息</button>
                         <button id="roll2">购买须知</button>
                         <button id="roll3">商品详情</button>--%>
-						<a href="" class=" tab-link active button" id="roll1">商品详情</a>
-						<a href="" class=" button" id="roll2">购买须知</a>
+						<a href="" class=" tab-link active button myTextColor" id="roll1" style="font-size: 0.8rem;">商品详情</a>
+						<a href="" class=" button" id="roll2" style="font-size: 0.8rem;">购买须知</a>
 					</div>
 				<%--<div class="buttons-tab">
 			    <a href="#tab1" class="tab-link active button">商品详情</a>
@@ -110,12 +116,12 @@
         </div>
         <nav class="bar bar-tab">
 		  <div class="row">
-		  	<a class="tab-item external" href="<%=request.getContextPath()%>/home" style="border-right:1px #aaaaaa solid;">
+		  	<a class="tab-item external" href="<%=request.getContextPath()%>/home" style="border-right:1px #CCCCCC solid;">
 		     <span class="icon"><img src="<%=request.getContextPath()%>/static/icon/index.png"/></span>
 		     <span class="tab-label">首页</span>
 		    </a>
 		    <!-- <a class="tab-item external" href="javascript:;" onclick="shareGoods()">分享抖音</a> -->
-		    <a class="tab-item external" style="background:#FFCC01;color:#000000;" href="<%=request.getContextPath()%>/goBuy?GOODS_ID=${pd.GOODS_ID}&FROMWXOPEN_ID=${FROMWXOPEN_ID}">立即购买</a>
+		    <a class="tab-item external" style="background:#FEE101;color:#000000;" href="<%=request.getContextPath()%>/goBuy?GOODS_ID=${pd.GOODS_ID}&FROMWXOPEN_ID=${FROMWXOPEN_ID}">立即购买</a>
 		  </div>
 		</nav>
         </div>

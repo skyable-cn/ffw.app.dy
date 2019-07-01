@@ -23,7 +23,7 @@
 				 <div style="height:150px;position:absolute;top:20px;z-index:999;left:5%;right:5%;font-size:0.85rem;">
 				 	<img align="middle" style="margin:10px; width:80px;border-radius:50%;" src="${USER_SESSION.PHOTO}"/>${USER_SESSION.NICKNAME}
 				 </div>
-				 <div class="div_height2" style="background:#ffffff;height:140px;position:absolute;top:130px;z-index:999;left:10px;right:10px;-webkit-box-shadow: 3px 3px 12px #666;-moz-box-shadow: 3px 3px 12px #666;box-shadow: 3px 3px 12px #666; -moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;">
+				 <div class="div_height2" style="background:#ffffff;height:140px;position:absolute;top:130px;z-index:999;left:10px;right:10px;-webkit-box-shadow: 3px 3px 12px #CCCCCC;-moz-box-shadow: 3px 3px 12px #CCCCCC;box-shadow: 3px 3px 12px #CCCCCC; -moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;">
 					 <a class="external" href="<%=request.getContextPath()%>/orders/all"><div class="row">
 					 	<div class="col-50" style="text-align:left;padding:20px 15px;">
 					 		我的订单
@@ -49,7 +49,7 @@
 			</div>
 			<div class="row">
 				<div class="col-100" style="padding:10px;">
-			<div class="div_height2" style="background:#ffffff;left:10px;right:10px;border-radius: 5px;border:1px #EEEEEE solid;-webkit-box-shadow: 3px 3px 12px #666;-moz-box-shadow: 3px 3px 12px #666;box-shadow: 3px 3px 12px #666; -moz-border-radius: 5px;-webkit-border-radius: 5px;">
+			<div class="div_height2" style="background:#ffffff;left:10px;right:10px;border-radius: 5px;border:1px #EEEEEE solid;-webkit-box-shadow: 3px 3px 12px #CCCCCC;-moz-box-shadow: 3px 3px 12px #CCCCCC;box-shadow: 3px 3px 12px #CCCCCC; -moz-border-radius: 5px;-webkit-border-radius: 5px;">
 					 <a class="external" href="<%=request.getContextPath()%>/my/account">
 					 <div class="row">
 					 	<div class="col-50" style="text-align:left;padding:20px 15px;">

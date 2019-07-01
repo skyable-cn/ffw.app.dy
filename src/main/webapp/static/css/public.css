@@ -1,0 +1,44 @@
+.proBox{
+    border: solid 1px #E5E5E5;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.proImage{
+    border-radius: 20px !important;
+    position: relative;
+    top: -2px;
+}
+.bigFontSize{
+    font-size: 0.8rem;
+}
+.smFontSize{
+    font-size: 0.6rem;
+}
+.proContentBox{
+    padding: 0 0.7rem !important;
+}
+.infoproContentBox{
+    padding: 0 !important;
+}
+.inFoBox{
+    border: none;
+}
+.myColor{
+    background:#FEE101 !important;
+}
+.myTextColor{
+    color:#FEE101 !important;
+}
+.deleteColor{
+    color:#999999;
+}
+.touxiangImage{
+    padding-left: 20px;
+}
+.touxiangImage>img{
+    width:35px;
+    border-radius:50%;
+    border:1px #CCCCCC solid;
+    /*position: absolute;*/
+    margin-left: -20px;
+}

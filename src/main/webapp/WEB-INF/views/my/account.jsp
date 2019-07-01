@@ -22,7 +22,7 @@
 				 <div style="height:80px;position:absolute;top:20px;z-index:999;left:5%;right:5%;">
 				 <p style="text-align: center;font-size:0.85rem;">¥ ${USER_SESSION.WAITACCOUNT}<span style="margin-right:15px;float:right;"><button class="button button-fill button-warning" style="background:#FFFFFF;color:#444444;margin:10px;margin-top:5px;margin-left:0px;padding-left:1.0rem;padding-right:1.0rem;" onclick="goApprove()">提现</button></span></p>
 				 </div>
-				 <div class="div_height2" style="background:#ffffff;height:80px;position:absolute;top:100px;z-index:999;left:5%;right:5%;-webkit-box-shadow: 3px 3px 12px #666;-moz-box-shadow: 3px 3px 12px #666;box-shadow: 3px 3px 12px #666; -moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;">
+				 <div class="div_height2" style="background:#ffffff;height:80px;position:absolute;top:100px;z-index:999;left:5%;right:5%;-webkit-box-shadow: 3px 3px 12px #ccc;-moz-box-shadow: 3px 3px 12px #ccc;box-shadow: 3px 3px 12px #ccc; -moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;">
 					 <div class="row">
 					 	<div class="col-25" style="text-align: center;padding-top:10px;">
 					 		¥ ${USER_SESSION.WAITACCOUNT}<br/>可提现

@@ -303,6 +303,7 @@ a:active {
   left: 0;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+  padding: 0 8px;
 }
 .bar-nav ~ .content {
   top: 2.2rem;
@@ -866,7 +867,7 @@ a:active {
   color: #999;
 }
 .color-primary {
-  color: #FFCC01;
+  color: #FEE101;
 }
 .color-success {
   color: #4cd964;
@@ -1037,7 +1038,7 @@ a:active {
 }
 .bar-tab .tab-item.active,
 .bar-tab .tab-item:active {
-  color: #FFCC01;
+  color: #FEE101;
 }
 .bar-tab .tab-item .badge {
   position: absolute;
@@ -1088,7 +1089,7 @@ a:active {
   font-size: 0.8rem;
   line-height: 2.2rem;
   height: 2.2rem;
-  color: #FFCC01;
+  color: #FEE101;
   border: 0;
 }
 .bar .button-link:active,
@@ -1582,7 +1583,7 @@ html:not(.watch-active-state) .list-block .item-link:active .item-inner:after,
 .list-block .item-link.list-button {
   padding: 0 0.75rem;
   text-align: center;
-  color: #FFCC01;
+  color: #FEE101;
   display: block;
   line-height: 2.15rem;
 }
@@ -1896,7 +1897,7 @@ html:not(.watch-active-state) .list-block .item-link:active .item-inner:after,
   display: none;
 }
 .label-switch input[type="checkbox"]:checked + .checkbox {
-  background: #FFCC01;
+  background: #FEE101;
 }
 .label-switch input[type="checkbox"]:checked + .checkbox:before {
   -webkit-transform: scale(0);
@@ -1984,7 +1985,7 @@ html.android .label-switch input[type="checkbox"] + .checkbox:before {
   height: 0.1rem;
   margin-top: -1px;
   z-index: 1;
-  background: #FFCC01;
+  background: #FEE101;
   content: ' ';
 }
 label.label-checkbox {
@@ -2015,7 +2016,7 @@ label.label-checkbox input[type="radio"] {
 label.label-checkbox input[type="checkbox"]:checked + .item-media i.icon-form-checkbox,
 label.label-checkbox input[type="radio"]:checked + .item-media i.icon-form-checkbox {
   border: none;
-  background-color: #FFCC01;
+  background-color: #FEE101;
 }
 label.label-checkbox input[type="checkbox"]:checked + .item-media i.icon-form-checkbox:after,
 label.label-checkbox input[type="radio"]:checked + .item-media i.icon-form-checkbox:after {
@@ -2128,7 +2129,7 @@ label.label-checkbox.active-state .item-inner:after {
   color: #5f646e;
 }
 .button {
-  border: 1px solid #FFCC01;
+  border: 1px solid #FEE101;
   color: #000000;
   text-decoration: none;
   text-align: center;
@@ -2157,15 +2158,15 @@ input[type="button"].button {
 }
 .button:active {
   color: #000000;
-  border-color: #FFCC01;
+  border-color: #FEE101;
 }
 .button.button-round {
   border-radius: 1.25rem;
 }
 .button.active,
 .button.active:active {
-  color: #FFCC01;
-  border-color: #FFCC01;
+  color: #FEE101;
+  border-color: #FEE101;
   font-weight:bold;
 }
 .button.button-big {
@@ -2175,13 +2176,13 @@ input[type="button"].button {
 }
 .button.button-fill {
   color: #000000;
-  background: #FFCC01;
+  background: #FEE101;
   border: none;
   line-height: 1.85rem;
 }
 .button.button-fill.active,
 .button.button-fill:active {
-  background: #FFCC01;
+  background: #FEE101;
 }
 .button.button-fill.button-big {
   line-height: 2.4rem;
@@ -2189,7 +2190,7 @@ input[type="button"].button {
 .button .button-link {
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
-  color: #FFCC01;
+  color: #FEE101;
   background-color: transparent;
   border: 0;
 }
@@ -2330,11 +2331,11 @@ input[type="button"].button {
   width: 100%;
   -webkit-box-flex: 1;
   -ms-flex: 1;
-  border-color: #FFCC01;
+  border-color: #FEE101;
   color: #000000;
 }
 .buttons-row .button.active {
-  background-color: #FFCC01;
+  background-color: #FEE101;
   color: #000000;
 }
 .buttons-row .button:first-child {
@@ -2395,8 +2396,8 @@ input[type="button"].button {
   border-radius: 0;
 }
 .buttons-tab .button.active {
-  color: #FFCC01;
-  border-color: #FFCC01;
+  color: #FEE101 ;
+  border-color: #FEE101 ;
 }
 .buttons-fixed {
   position: fixed;
@@ -2808,7 +2809,7 @@ input[type="button"].button {
   font-size: 0.85rem;
   line-height: 2.2rem;
   text-align: center;
-  color: #FFCC01;
+  color: #FEE101;
   background: #e8e8e8;
   display: block;
   position: relative;
@@ -3038,7 +3039,7 @@ html:not(.watch-active-state) .modal-button:active,
   cursor: pointer;
   line-height: 2.15rem;
   font-size: 1rem;
-  color: #FFCC01;
+  color: #FEE101;
 }
 .actions-modal-button:active,
 .actions-modal-button.active-state {
@@ -3830,7 +3831,7 @@ body.panel-closing .page {
   background: #e3e3e3;
 }
 .picker-calendar-day.picker-calendar-day-selected span {
-  background: #FFCC01;
+  background: #FEE101;
   color: #fff;
 }
 .picker-calendar-day span {
@@ -4313,7 +4314,7 @@ Framework7 Layouts Themes
   color: #fff;
 }
 .theme-dark .tab-item.active {
-  color: #FFCC01;
+  color: #FEE101;
 }
 .theme-dark .picker-calendar-week-days {
   color: #fff;
@@ -4735,7 +4736,7 @@ html:not(.watch-active-state) .theme-white label.label-radio:active,
 	text-align: center;
 }
 .suspend{
-	background:#FFCC01;
+	background:#FEE101;
 	filter:alpha(Opacity=90);
 	-moz-opacity:0.9;
 	opacity: 0.9;
