@@ -61,7 +61,7 @@ public class PayController extends BaseController {
 
 	@RequestMapping("dyPay")
 	@ResponseBody
-	public Map<String, String> wxPay() throws Exception {
+	public Map<String, String> dyPay() throws Exception {
 
 		logger.info("进入下单处理");
 		PageData pd = new PageData();
@@ -154,21 +154,11 @@ public class PayController extends BaseController {
 		System.err.println(str);
 
 		JSONObject obj = JSONObject.fromObject(str);
-		String r_sign = obj.getString("sign");
 		String r_trade_no = obj.getJSONObject("response").getString("trade_no");
 
 		System.out.println("========================二次签名==============================");
 
-		String p0 = "app_id=" + MAPPID + "&biz_content={\"subject\":\"" + SUBJECT + "\",\"out_trade_no\":\"" + SNID
-				+ "\",\"total_amount\":\"" + fee
-				+ "\",\"product_code\":\"QUICK_MSECURITY_PAY\"}&charset=utf-8&format=JSON&method=alipay.trade.app.pay&notify_url=https://fanfan.skyable.cn/appdy/dyNotify&sign_type=RSA&timestamp="
-				+ dl + "&version=1.0";
-
-		p0 = URLEncoder.encode(p0, "utf-8").replaceAll("%3D", "=").replaceAll("%26", "&");
-
-		p0 = p0.replace("sign_type", "sign=" + r_sign + "&sign_type");
-
-		p0 = AliPayUtil.getUrl(SUBJECT, BODYDESC, SNID, MONEY,
+		String p0 = AliPayUtil.getUrl(SUBJECT, BODYDESC, SNID, MONEY,
 				URLEncoder.encode("trade_type=" + type + "&openid=" + openId(), "utf-8"));
 
 		System.err.println("支付宝URL:" + p0);
@@ -198,7 +188,7 @@ public class PayController extends BaseController {
 
 	@RequestMapping(value = "/dyNotify")
 	@ResponseBody
-	public String wxNotify(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String dyNotify(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// 获取支付宝POST过来反馈信息
 		Map<String, String> receiveMap = getReceiveMap(request);
 		logger.info("支付宝支付回调参数:" + receiveMap);
