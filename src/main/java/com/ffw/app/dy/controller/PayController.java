@@ -1,5 +1,6 @@
 package com.ffw.app.dy.controller;
 
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -204,6 +205,11 @@ public class PayController extends BaseController {
 
 		String transaction_id = receiveMap.get("trade_no");
 		String out_trade_no = receiveMap.get("out_trade_no");
+		String[] passback_params = URLDecoder.decode(receiveMap.get("passback_params"), "utf-8").split("&");
+		for (int i = 0; i < passback_params.length; i++) {
+			String[] kv = passback_params[i].split("=");
+			receiveMap.put(kv[0], kv[1]);
+		}
 		String type = receiveMap.get("trade_type");
 		PageData pd = new PageData();
 		if ("goods".equals(type)) {
