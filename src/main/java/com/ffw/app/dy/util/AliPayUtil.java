@@ -8,7 +8,7 @@ import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
 
 public class AliPayUtil {
-	public static String getUrl(String subject, String body, String snid, String money) {
+	public static String getUrl(String subject, String body, String snid, String money, String passbackParams) {
 		String result = null;
 		// 实例化客户端
 		// AlipayClient alipayClient = new
@@ -33,6 +33,7 @@ public class AliPayUtil {
 		model.setTimeoutExpress("5d");
 		model.setTotalAmount(money);
 		model.setProductCode("QUICK_MSECURITY_PAY");
+		model.setPassbackParams(passbackParams);
 		request.setBizModel(model);
 		request.setNotifyUrl("https://fanfan.skyable.cn/appdy/dyNotify");
 		try {
