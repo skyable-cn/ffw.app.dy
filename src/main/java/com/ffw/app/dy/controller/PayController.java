@@ -126,6 +126,10 @@ public class PayController extends BaseController {
 		String MAPPID = market.getString("DYMAPPID");
 		String MAPPSECRET = market.getString("DYMAPPSECRET");
 
+		String ALIAPPID = market.getString("ALIAPPID");
+		String ALIPRIVATEKEY = market.getString("ALIPRIVATEKEY");
+		String ALIPUBLICKEY = market.getString("ALIPUBLICKEY");
+
 		System.out.println("========================开始签名==============================");
 
 		String dl = new Date().getTime() + "";
@@ -158,7 +162,7 @@ public class PayController extends BaseController {
 
 		System.out.println("========================二次签名==============================");
 
-		String p0 = AliPayUtil.getUrl(SUBJECT, BODYDESC, SNID, MONEY,
+		String p0 = new AliPayUtil(ALIAPPID, ALIPRIVATEKEY, ALIPUBLICKEY).getUrl(SUBJECT, BODYDESC, SNID, MONEY,
 				URLEncoder.encode("trade_type=" + type + "&openid=" + openId(), "utf-8"));
 
 		System.err.println("支付宝URL:" + p0);
