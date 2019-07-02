@@ -310,45 +310,50 @@ public class PayController extends BaseController {
 
 			if (pdmember.getString("MEMBERTYPE_ID").equals(IConstant.STRING_1)
 					|| pdmember.getString("MEMBERTYPE_ID").equals(IConstant.STRING_3)) {
-				String GIVEMONEY = String.valueOf(Double.parseDouble(pdgoods.getString("MEMBERBACKMONEY"))
-						* Double.parseDouble(pd.getString("NUMBER")));
+				if (StringUtils.isNotEmpty(pdgoods.getString("MEMBERBACKMONEY"))) {
 
-				PageData pdaccount = new PageData();
-				pdaccount.put("ORDER_ID", pd.getString("ORDER_ID"));
-				pdaccount.put("MEMBER_ID", pd.getString("MEMBER_ID"));
-				pdaccount.put("GIVEMONEY", GIVEMONEY);
-				pdaccount.put("DESCRIPTION", "普通/达人用户购买返利");
-				pdaccount.put("TYPE", IConstant.STRING_0);
-				pdaccount.put("CDT", DateUtil.getTime());
-				rest.post(IConstant.FFW_SERVICE_KEY, "member/saveAccount", pdaccount, PageData.class);
+					String GIVEMONEY = String.valueOf(Double.parseDouble(pdgoods.getString("MEMBERBACKMONEY"))
+							* Double.parseDouble(pd.getString("NUMBER")));
 
-				PageData pdwaitaccount = new PageData();
-				pdwaitaccount.put("MEMBER_ID", pd.getString("MEMBER_ID"));
-				String waitaccount = String.valueOf(DoubleUtil
-						.sum(Double.parseDouble(pdmember.getString("WAITACCOUNT")), Double.parseDouble(GIVEMONEY)));
-				pdwaitaccount.put("WAITACCOUNT", waitaccount);
-				rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount, PageData.class);
+					PageData pdaccount = new PageData();
+					pdaccount.put("ORDER_ID", pd.getString("ORDER_ID"));
+					pdaccount.put("MEMBER_ID", pd.getString("MEMBER_ID"));
+					pdaccount.put("GIVEMONEY", GIVEMONEY);
+					pdaccount.put("DESCRIPTION", "普通/达人用户购买返利");
+					pdaccount.put("TYPE", IConstant.STRING_0);
+					pdaccount.put("CDT", DateUtil.getTime());
+					rest.post(IConstant.FFW_SERVICE_KEY, "member/saveAccount", pdaccount, PageData.class);
+
+					PageData pdwaitaccount = new PageData();
+					pdwaitaccount.put("MEMBER_ID", pd.getString("MEMBER_ID"));
+					String waitaccount = String.valueOf(DoubleUtil
+							.sum(Double.parseDouble(pdmember.getString("WAITACCOUNT")), Double.parseDouble(GIVEMONEY)));
+					pdwaitaccount.put("WAITACCOUNT", waitaccount);
+					rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount, PageData.class);
+				}
 
 			} else if (pdmember.getString("MEMBERTYPE_ID").equals(IConstant.STRING_2)
 					|| pdmember.getString("MEMBERTYPE_ID").equals(IConstant.STRING_4)) {
-				String GIVEMONEY = String.valueOf(Double.parseDouble(pdgoods.getString("VIPBACKMONEY"))
-						* Double.parseDouble(pd.getString("NUMBER")));
+				if (StringUtils.isNotEmpty(pdgoods.getString("VIPBACKMONEY"))) {
+					String GIVEMONEY = String.valueOf(Double.parseDouble(pdgoods.getString("VIPBACKMONEY"))
+							* Double.parseDouble(pd.getString("NUMBER")));
 
-				PageData pdaccount = new PageData();
-				pdaccount.put("ORDER_ID", pd.getString("ORDER_ID"));
-				pdaccount.put("MEMBER_ID", pd.getString("MEMBER_ID"));
-				pdaccount.put("GIVEMONEY", GIVEMONEY);
-				pdaccount.put("DESCRIPTION", "普通/达人会员购买返利");
-				pdaccount.put("CDT", DateUtil.getTime());
-				pdaccount.put("TYPE", IConstant.STRING_1);
-				rest.post(IConstant.FFW_SERVICE_KEY, "member/saveAccount", pdaccount, PageData.class);
+					PageData pdaccount = new PageData();
+					pdaccount.put("ORDER_ID", pd.getString("ORDER_ID"));
+					pdaccount.put("MEMBER_ID", pd.getString("MEMBER_ID"));
+					pdaccount.put("GIVEMONEY", GIVEMONEY);
+					pdaccount.put("DESCRIPTION", "普通/达人会员购买返利");
+					pdaccount.put("CDT", DateUtil.getTime());
+					pdaccount.put("TYPE", IConstant.STRING_1);
+					rest.post(IConstant.FFW_SERVICE_KEY, "member/saveAccount", pdaccount, PageData.class);
 
-				PageData pdwaitaccount = new PageData();
-				pdwaitaccount.put("MEMBER_ID", pd.getString("MEMBER_ID"));
-				String waitaccount = String.valueOf(DoubleUtil
-						.sum(Double.parseDouble(pdmember.getString("WAITACCOUNT")), Double.parseDouble(GIVEMONEY)));
-				pdwaitaccount.put("WAITACCOUNT", waitaccount);
-				rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount, PageData.class);
+					PageData pdwaitaccount = new PageData();
+					pdwaitaccount.put("MEMBER_ID", pd.getString("MEMBER_ID"));
+					String waitaccount = String.valueOf(DoubleUtil
+							.sum(Double.parseDouble(pdmember.getString("WAITACCOUNT")), Double.parseDouble(GIVEMONEY)));
+					pdwaitaccount.put("WAITACCOUNT", waitaccount);
+					rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount, PageData.class);
+				}
 			} else {
 
 			}
@@ -356,79 +361,90 @@ public class PayController extends BaseController {
 			PageData pd1 = new PageData();
 			if (StringUtils.isNotEmpty(pd.getString("FROMWXOPEN_ID"))) {
 				pd1.put("ORDER_ID", pd.getString("ORDER_ID"));
-				String GIVEMONEY0 = String.valueOf(Double.parseDouble(pdgoods.getString("BACKMONEY0"))
-						* Double.parseDouble(pd.getString("NUMBER")));
-				pd1.put("GIVEMONEY", GIVEMONEY0);
-				pd1.put("GDT", DateUtil.getTime());
-				rest.post(IConstant.FFW_SERVICE_KEY, "orders/edit", pd1, PageData.class);
-
-				PageData pdmember0 = new PageData();
-				pdmember0.put("WXOPEN_ID", pd.getString("FROMWXOPEN_ID"));
-				pdmember0 = rest.post(IConstant.FFW_SERVICE_KEY, "member/findBy", pdmember0, PageData.class);
-
-				PageData pdaccount0 = new PageData();
-				pdaccount0.put("ORDER_ID", pd.getString("ORDER_ID"));
-				pdaccount0.put("MEMBER_ID", pdmember0.getString("MEMBER_ID"));
-				pdaccount0.put("GIVEMONEY", GIVEMONEY0);
-				pdaccount0.put("DESCRIPTION", "分销本级返利");
-				pdaccount0.put("TYPE", IConstant.STRING_2);
-				pdaccount0.put("CDT", DateUtil.getTime());
-				rest.post(IConstant.FFW_SERVICE_KEY, "member/saveAccount", pdaccount0, PageData.class);
-
-				PageData pdwaitaccount0 = new PageData();
-				pdwaitaccount0.put("MEMBER_ID", pdmember0.getString("MEMBER_ID"));
-				String waitaccount = String.valueOf(DoubleUtil
-						.sum(Double.parseDouble(pdmember0.getString("WAITACCOUNT")), Double.parseDouble(GIVEMONEY0)));
-				pdwaitaccount0.put("WAITACCOUNT", waitaccount);
-				rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount0, PageData.class);
-
-				if (StringUtils.isNotEmpty(pdmember0.getString("FROMWXOPEN_ID"))) {
-					String GIVEMONEY1 = String.valueOf(Double.parseDouble(pdgoods.getString("BACKMONEY1"))
+				if (StringUtils.isNotEmpty(pdgoods.getString("BACKMONEY0"))) {
+					String GIVEMONEY0 = String.valueOf(Double.parseDouble(pdgoods.getString("BACKMONEY0"))
 							* Double.parseDouble(pd.getString("NUMBER")));
+					pd1.put("GIVEMONEY", GIVEMONEY0);
+					pd1.put("GDT", DateUtil.getTime());
+					rest.post(IConstant.FFW_SERVICE_KEY, "orders/edit", pd1, PageData.class);
 
-					PageData pdmember1 = new PageData();
-					pdmember1.put("WXOPEN_ID", pdmember0.getString("FROMWXOPEN_ID"));
-					pdmember1 = rest.post(IConstant.FFW_SERVICE_KEY, "member/findBy", pdmember1, PageData.class);
+					PageData pdmember0 = new PageData();
+					pdmember0.put("WXOPEN_ID", pd.getString("FROMWXOPEN_ID"));
+					pdmember0 = rest.post(IConstant.FFW_SERVICE_KEY, "member/findBy", pdmember0, PageData.class);
 
-					PageData pdaccount1 = new PageData();
-					pdaccount1.put("ORDER_ID", pd.getString("ORDER_ID"));
-					pdaccount1.put("MEMBER_ID", pdmember1.getString("MEMBER_ID"));
-					pdaccount1.put("GIVEMONEY", GIVEMONEY1);
-					pdaccount1.put("DESCRIPTION", "分销一级返利");
-					pdaccount1.put("TYPE", IConstant.STRING_3);
-					pdaccount1.put("CDT", DateUtil.getTime());
-					rest.post(IConstant.FFW_SERVICE_KEY, "member/saveAccount", pdaccount1, PageData.class);
+					PageData pdaccount0 = new PageData();
+					pdaccount0.put("ORDER_ID", pd.getString("ORDER_ID"));
+					pdaccount0.put("MEMBER_ID", pdmember0.getString("MEMBER_ID"));
+					pdaccount0.put("GIVEMONEY", GIVEMONEY0);
+					pdaccount0.put("DESCRIPTION", "分销本级返利");
+					pdaccount0.put("TYPE", IConstant.STRING_2);
+					pdaccount0.put("CDT", DateUtil.getTime());
+					rest.post(IConstant.FFW_SERVICE_KEY, "member/saveAccount", pdaccount0, PageData.class);
 
-					PageData pdwaitaccount1 = new PageData();
-					pdwaitaccount1.put("MEMBER_ID", pdmember1.getString("MEMBER_ID"));
-					String waitaccount1 = String.valueOf(
-							Double.parseDouble(pdmember1.getString("WAITACCOUNT")) + Double.parseDouble(GIVEMONEY1));
-					pdwaitaccount1.put("WAITACCOUNT", waitaccount1);
-					rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount1, PageData.class);
+					PageData pdwaitaccount0 = new PageData();
+					pdwaitaccount0.put("MEMBER_ID", pdmember0.getString("MEMBER_ID"));
+					String waitaccount = String.valueOf(DoubleUtil.sum(
+							Double.parseDouble(pdmember0.getString("WAITACCOUNT")), Double.parseDouble(GIVEMONEY0)));
+					pdwaitaccount0.put("WAITACCOUNT", waitaccount);
+					rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount0, PageData.class);
 
-					if (StringUtils.isNotEmpty(pdmember1.getString("FROMWXOPEN_ID"))) {
-						String GIVEMONEY2 = String.valueOf(Double.parseDouble(pdgoods.getString("BACKMONEY2"))
-								* Double.parseDouble(pd.getString("NUMBER")));
+					if (StringUtils.isNotEmpty(pdmember0.getString("FROMWXOPEN_ID"))) {
+						if (StringUtils.isNotEmpty(pdgoods.getString("BACKMONEY1"))) {
+							String GIVEMONEY1 = String.valueOf(Double.parseDouble(pdgoods.getString("BACKMONEY1"))
+									* Double.parseDouble(pd.getString("NUMBER")));
 
-						PageData pdmember2 = new PageData();
-						pdmember2.put("WXOPEN_ID", pdmember1.getString("FROMWXOPEN_ID"));
-						pdmember2 = rest.post(IConstant.FFW_SERVICE_KEY, "member/findBy", pdmember2, PageData.class);
+							PageData pdmember1 = new PageData();
+							pdmember1.put("WXOPEN_ID", pdmember0.getString("FROMWXOPEN_ID"));
+							pdmember1 = rest.post(IConstant.FFW_SERVICE_KEY, "member/findBy", pdmember1,
+									PageData.class);
 
-						PageData pdaccount2 = new PageData();
-						pdaccount2.put("ORDER_ID", pd.getString("ORDER_ID"));
-						pdaccount2.put("MEMBER_ID", pdmember2.getString("MEMBER_ID"));
-						pdaccount2.put("GIVEMONEY", GIVEMONEY2);
-						pdaccount2.put("DESCRIPTION", "分销二级返利");
-						pdaccount2.put("TYPE", IConstant.STRING_4);
-						pdaccount2.put("CDT", DateUtil.getTime());
-						rest.post(IConstant.FFW_SERVICE_KEY, "member/saveAccount", pdaccount2, PageData.class);
+							PageData pdaccount1 = new PageData();
+							pdaccount1.put("ORDER_ID", pd.getString("ORDER_ID"));
+							pdaccount1.put("MEMBER_ID", pdmember1.getString("MEMBER_ID"));
+							pdaccount1.put("GIVEMONEY", GIVEMONEY1);
+							pdaccount1.put("DESCRIPTION", "分销一级返利");
+							pdaccount1.put("TYPE", IConstant.STRING_3);
+							pdaccount1.put("CDT", DateUtil.getTime());
+							rest.post(IConstant.FFW_SERVICE_KEY, "member/saveAccount", pdaccount1, PageData.class);
 
-						PageData pdwaitaccount2 = new PageData();
-						pdwaitaccount2.put("MEMBER_ID", pdmember2.getString("MEMBER_ID"));
-						String waitaccount2 = String.valueOf(Double.parseDouble(pdmember2.getString("WAITACCOUNT"))
-								+ Double.parseDouble(GIVEMONEY2));
-						pdwaitaccount2.put("WAITACCOUNT", waitaccount2);
-						rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount2, PageData.class);
+							PageData pdwaitaccount1 = new PageData();
+							pdwaitaccount1.put("MEMBER_ID", pdmember1.getString("MEMBER_ID"));
+							String waitaccount1 = String.valueOf(Double.parseDouble(pdmember1.getString("WAITACCOUNT"))
+									+ Double.parseDouble(GIVEMONEY1));
+							pdwaitaccount1.put("WAITACCOUNT", waitaccount1);
+							rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount1, PageData.class);
+
+							if (StringUtils.isNotEmpty(pdmember1.getString("FROMWXOPEN_ID"))) {
+								if (StringUtils.isNotEmpty(pdgoods.getString("BACKMONEY2"))) {
+									String GIVEMONEY2 = String
+											.valueOf(Double.parseDouble(pdgoods.getString("BACKMONEY2"))
+													* Double.parseDouble(pd.getString("NUMBER")));
+
+									PageData pdmember2 = new PageData();
+									pdmember2.put("WXOPEN_ID", pdmember1.getString("FROMWXOPEN_ID"));
+									pdmember2 = rest.post(IConstant.FFW_SERVICE_KEY, "member/findBy", pdmember2,
+											PageData.class);
+
+									PageData pdaccount2 = new PageData();
+									pdaccount2.put("ORDER_ID", pd.getString("ORDER_ID"));
+									pdaccount2.put("MEMBER_ID", pdmember2.getString("MEMBER_ID"));
+									pdaccount2.put("GIVEMONEY", GIVEMONEY2);
+									pdaccount2.put("DESCRIPTION", "分销二级返利");
+									pdaccount2.put("TYPE", IConstant.STRING_4);
+									pdaccount2.put("CDT", DateUtil.getTime());
+									rest.post(IConstant.FFW_SERVICE_KEY, "member/saveAccount", pdaccount2,
+											PageData.class);
+
+									PageData pdwaitaccount2 = new PageData();
+									pdwaitaccount2.put("MEMBER_ID", pdmember2.getString("MEMBER_ID"));
+									String waitaccount2 = String
+											.valueOf(Double.parseDouble(pdmember2.getString("WAITACCOUNT"))
+													+ Double.parseDouble(GIVEMONEY2));
+									pdwaitaccount2.put("WAITACCOUNT", waitaccount2);
+									rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount2, PageData.class);
+								}
+							}
+						}
 					}
 				}
 			}
