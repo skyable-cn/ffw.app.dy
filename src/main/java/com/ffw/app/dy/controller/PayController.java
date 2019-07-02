@@ -212,7 +212,7 @@ public class PayController extends BaseController {
 			}
 
 			pd.put("WEIXINSN", transaction_id);
-			pd.put("STATE", IConstant.STRING_1);
+			pd.put("STATE", IConstant.STRING_2);
 			rest.post(IConstant.FFW_SERVICE_KEY, "orders/edit", pd, PageData.class);
 
 			if (pd.getString("VIPFLAG").equals(IConstant.STRING_1)) {
