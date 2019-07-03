@@ -82,7 +82,7 @@
 						<%--<button id="roll1">商家信息</button>
                         <button id="roll2">购买须知</button>
                         <button id="roll3">商品详情</button>--%>
-						<a href="" class=" tab-link active button myTextColor" id="roll1" style="font-size: 0.8rem;">商品详情</a>
+						<a href="" class=" tab-link active button " id="roll1" style="font-size: 0.8rem;">商品详情</a>
 						<a href="" class=" button" id="roll2" style="font-size: 0.8rem;">购买须知</a>
 					</div>
 				<%--<div class="buttons-tab">
@@ -105,7 +105,7 @@
 		      <div id="roll_top1">
 		        <div class="row" style="padding:5px;">
 				<div class="col-100">
-					<div style="min-height:180px;padding:10px;border:1px #dddddd solid;word-wrap: break-word;word-break: break-all;overflow: hidden;">${pd.BUYNOTICE}</div>
+					<div style="min-height:180px;padding:10px;word-wrap: break-word;word-break: break-all;overflow: hidden;">${pd.BUYNOTICE}</div>
 				</div>
 			</div>
 		      </div>
@@ -116,7 +116,7 @@
         </div>
         <nav class="bar bar-tab">
 		  <div class="row">
-		  	<a class="tab-item external" href="<%=request.getContextPath()%>/home" style="border-right:1px #CCCCCC solid;">
+		  	<a class="tab-item external" href="<%=request.getContextPath()%>/home" style="border-right:1px #dddddd solid;">
 		     <span class="icon"><img src="<%=request.getContextPath()%>/static/icon/index.png"/></span>
 		     <span class="tab-label">首页</span>
 		    </a>
