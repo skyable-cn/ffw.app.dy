@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,9 @@ public class PayController extends BaseController {
 
 	@Autowired
 	RestTemplateUtil rest;
+
+	@Value("${server.hostname}")
+	private String HOSTNAME;
 
 	private String getIpAddr(HttpServletRequest request) {
 		String ip = request.getHeader("X-Forwarded-For");
@@ -137,8 +141,8 @@ public class PayController extends BaseController {
 		String biz_content = "{\"out_order_no\":\"" + SNID + "\",\"uid\":\"" + openId() + "\",\"merchant_id\":\""
 				+ MCHID + "\",\"total_amount\":\"" + fee + "\",\"currency\":\"CNY\",\"subject\":\"" + SUBJECT
 				+ "\",\"body\":\"" + BODYDESC + "\",\"trade_time\":\"" + dl
-				+ "\",\"valid_time\":\"1800\",\"notify_url\":\"https://fanfan.skyable.cn/appdy/dyNotify\",\"risk_info\":{\"ip\":\""
-				+ spbill_create_ip + "\",\"device_id\":\"10001\"}}";
+				+ "\",\"valid_time\":\"1800\",\"notify_url\":\"" + HOSTNAME
+				+ "/appdy/dyNotify\",\"risk_info\":{\"ip\":\"" + spbill_create_ip + "\",\"device_id\":\"10001\"}}";
 		String param0 = "app_id=" + MAPPID + "&biz_content=" + biz_content
 				+ "&charset=utf-8&format=JSON&method=tp.trade.create&sign_type=MD5&timestamp=" + dl + "&version=1.0";
 		param0 = param0 + MAPPSECRET;
@@ -162,8 +166,8 @@ public class PayController extends BaseController {
 
 		System.out.println("========================二次签名==============================");
 
-		String p0 = new AliPayUtil(ALIAPPID, ALIPRIVATEKEY, ALIPUBLICKEY).getUrl(SUBJECT, BODYDESC, SNID, MONEY,
-				URLEncoder.encode("trade_type=" + type + "&openid=" + openId(), "utf-8"));
+		String p0 = new AliPayUtil(ALIAPPID, ALIPRIVATEKEY, ALIPUBLICKEY, HOSTNAME).getUrl(SUBJECT, BODYDESC, SNID,
+				MONEY, URLEncoder.encode("trade_type=" + type + "&openid=" + openId(), "utf-8"));
 
 		System.err.println("支付宝URL:" + p0);
 

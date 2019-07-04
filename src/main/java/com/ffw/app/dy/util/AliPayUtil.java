@@ -15,10 +15,13 @@ public class AliPayUtil {
 
 	private String alipublickey;
 
-	public AliPayUtil(String mchid, String privatekey, String alipublickey) {
+	private String noticeUrl;
+
+	public AliPayUtil(String mchid, String privatekey, String alipublickey, String hostName) {
 		this.mchid = mchid;
 		this.privatekey = privatekey;
 		this.alipublickey = alipublickey;
+		this.noticeUrl = hostName + "/appdy/dyNotify";
 	}
 
 	public String getUrl(String subject, String body, String snid, String money, String passbackParams) {
@@ -37,7 +40,7 @@ public class AliPayUtil {
 		model.setProductCode("QUICK_MSECURITY_PAY");
 		model.setPassbackParams(passbackParams);
 		request.setBizModel(model);
-		request.setNotifyUrl("https://fanfan.skyable.cn/appdy/dyNotify");
+		request.setNotifyUrl(noticeUrl);
 		try {
 			// 这里和普通的接口调用不同，使用的是sdkExecute
 			AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);
