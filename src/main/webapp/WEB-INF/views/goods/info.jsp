@@ -13,6 +13,23 @@
     <%@ include file="../common/headcss.jsp"%>
     <%@ include file="../common/utiljs.jsp"%>
     <script type="text/javascript" src="https://s3.pstatp.com/toutiao/tmajssdk/jssdk-1.0.0.js"></script>
+	<style>
+		.positionBox{
+			position:fixed;
+			top: 0;
+			width: 93%;
+			border-bottom: solid 1px #F2F2F2;
+		}
+		.fenxiangBox{
+			text-align: left;
+			padding: 10px 0px 0px 0px;
+		}
+		.fenxiangBox>span{
+			background: #FECB17;
+			padding: 5px 8px;
+			border-radius: 3px;
+		}
+	</style>
   </head>
   <body>
     <div class="page-group">
@@ -74,16 +91,16 @@
 		        <div class="col-40" style="text-align:right;line-height:60px;"><img onclick="phone()" width="20" style="margin-right:15px;" src="<%=request.getContextPath()%>/static/icon/phone.png"/> | <img  onclick="position()" style="margin-left:15px;" width="20" src="<%=request.getContextPath()%>/static/icon/send.png"/></div>
 			</div>
 			<div style="width:100%;height:5px;margin: 10px 0" class="grayBox">&nbsp;</div>
-			<div class="row" style="padding:5px;">
+			<div class="row" style="padding:5px;" id="proInfoBox">
 				<div class="col-100">
 
-					<div class="buttons-tab">
+					<div class="buttons-tab" id="bignav" onscroll="myFunction()">
 
 						<%--<button id="roll1">商家信息</button>
                         <button id="roll2">购买须知</button>
                         <button id="roll3">商品详情</button>--%>
-						<a href="" class=" tab-link active button " id="roll1" style="font-size: 0.8rem;">商品详情</a>
-						<a href="" class=" button" id="roll2" style="font-size: 0.8rem;">购买须知</a>
+						<a href="" class=" tab-link active button " id="roll1" style="font-size: 0.8rem;">购买须知</a>
+						<a href="" class=" button" id="roll2" style="font-size: 0.8rem;">商品详情</a>
 					</div>
 				<%--<div class="buttons-tab">
 			    <a href="#tab1" class="tab-link active button">商品详情</a>
@@ -93,21 +110,22 @@
 
 		    <div >
 		      <div id="roll_top" >
-		        <c:forEach var="var" items="${fileDataList}" varStatus="index">
-		        <div style="text-align:center;padding:5px;">${index.index+1}产品图片</div>
-				<div class="row" style="padding:5px;">
-				<div class="col-100">
-					<img style="border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;" height="200" width="100%" src="<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}" alt="">
-				</div>
-		      </div>
-		      </c:forEach>
+				  <div class="row" style="padding:5px;">
+					  <div class="col-100">
+						  <div style="min-height:180px;padding:10px;word-wrap: break-word;word-break: break-all;overflow: hidden;">${pd.BUYNOTICE}</div>
+					  </div>
+				  </div>
 		    </div>
 		      <div id="roll_top1">
-		        <div class="row" style="padding:5px;">
-				<div class="col-100">
-					<div style="min-height:180px;padding:10px;word-wrap: break-word;word-break: break-all;overflow: hidden;">${pd.BUYNOTICE}</div>
-				</div>
-			</div>
+				  <div class="row" style="padding:5px;">
+					  <div class="col-100">
+						  <%--
+                                              <img style="border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;" height="200" width="100%" src="<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}" alt="">
+                          --%>
+						  <div style="min-height:180px;padding:10px;word-wrap: break-word;word-break: break-all;overflow: hidden;">${pd.GOODSDETIAL}</div>
+
+					  </div>
+				  </div>
 		      </div>
 				</div>
 			</div>
@@ -160,6 +178,16 @@
 
 		  return result;
 	  }
+
+
+	  $(".content").scroll(function (evt) {
+		  var ss3=$("#proInfoBox").offset().top;
+		  if(ss3<-1){
+			  $("#bignav").addClass("positionBox");
+		  }else{
+			  $("#bignav").removeClass("positionBox");
+		  }
+	  });
 	  //手指接触屏幕
 	  document.addEventListener("touchstart", function(e) {
 		  startx = e.touches[0].pageX;
@@ -179,12 +207,12 @@
 			  case 0:
 				  break;
 			  case 1:
-				  if(ss>=200){
+				  if(ss<=199&&ss1>=120){
 					  // 向上滑动，图1高亮
 					  $("#roll2").removeClass("active");
 					  $("#roll1").addClass("tab-link active button");
 				  }
-				  if(ss<=199&&ss1>=120){
+				  if(ss1<=199){
 					  // 向上滑动，图2高亮
 					  $("#roll1").removeClass("active");
 					  $("#roll2").addClass("tab-link active button");
@@ -192,12 +220,12 @@
 
 				  break;
 			  case 2:
-				  if(ss>=200){
+				  if(ss<=199&&ss1>=120){
 					  // 向上滑动，图1高亮
 					  $("#roll2").removeClass("active");
 					  $("#roll1").addClass("tab-link active button");
 				  }
-				  if(ss<=199&&ss1>=120){
+				  if(ss1<=199){
 					  // 向上滑动，图2高亮
 					  $("#roll1").removeClass("active");
 					  $("#roll2").addClass("tab-link active button");
