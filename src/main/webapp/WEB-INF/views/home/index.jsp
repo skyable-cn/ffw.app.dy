@@ -46,6 +46,9 @@
         line-height: 1.6rem !important;
         height: 1.6rem !important;
     }
+    .external{
+        height: 180px;
+    }
 </style>
 <body>
 <div class="page-group">
@@ -103,7 +106,7 @@
     					<div class="col-100">
     				<div class="card demo-card-header-pic proBox">
     				    <a class="external" href="<%=request.getContextPath()%>/goods/info?GOODS_ID=`+value.GOODS_ID+`"><div valign="bottom" class="card-header color-white no-border no-padding">
-    				      <img class='card-cover proImage' style="width:100%;" height="200" src="<%=request.getContextPath()%>/file/image?FILENAME=`+value.FILEPATH+`" alt="">
+    				      <img class='card-cover proImage' style="width:100%;" height="200px" src="<%=request.getContextPath()%>/file/image?FILENAME=`+value.FILEPATH+`" alt="">
     				    </a></div>
     				    <div class="card-footer proContentBox">
 	  				      <span class="bigFontSize">`;
@@ -189,7 +192,7 @@
 
             //容器发生改变,如果是js滚动，需要刷新滚动
             $.refreshScroller();
-        }, 500);
+        }, 500,);
     });
 </script>
 

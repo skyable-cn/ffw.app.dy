@@ -17,8 +17,9 @@
 		.positionBox{
 			position:fixed;
 			top: 0;
-			width: 93%;
-			border-bottom: solid 1px #F2F2F2;
+			width: 104%;
+			/*border-bottom: solid 1px #F2F2F2;*/
+			box-shadow: 1px 1px 5px #F0F0F0;
 		}
 		.fenxiangBox{
 			text-align: left;
@@ -28,6 +29,13 @@
 			background: #FECB17;
 			padding: 5px 8px;
 			border-radius: 3px;
+		}
+		.active{
+			background: #FDE01A;
+		}
+		.buttons-tab .button.active{
+			color: #474747;
+			font-weight: normal;
 		}
 	</style>
   </head>
@@ -39,7 +47,7 @@
 				<div class="col-100">
 				<div class="card demo-card-header-pic inFoBox" style="margin-bottom: 0">
 				    <div valign="bottom" class="card-header color-white no-border no-padding">
-				      <img class='card-cover' height="200" width="100%" src="<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}" alt="" onerror="javascript:this.src='<%=request.getContextPath()%>/file/image?FILENAME=${pd.FILEPATH}';">
+				      <img class='card-cover' height="200" width="100%" style="border-radius: 10px" src="<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}" alt="" onerror="javascript:this.src='<%=request.getContextPath()%>/file/image?FILENAME=${pd.FILEPATH}';">
 				    </div>
 				    <div class="card-footer infoproContentBox" style="margin-top:10px;">
 				      <span>
@@ -47,24 +55,25 @@
 				      	<h4 style="margin:0px;margin-top:10px;font-weight: normal" class="delete deleteColor">原价 ${pd.ORIGINALMONEY}元</h4>
 				      </span>
 				      <span>
-				      	<div id="goods_time_id_${pd.GOODS_ID}_tj_right" class="suspend right" style="background: #FEE101">活动结束倒计时<div id="goods_time_id_${pd.GOODS_ID}_tj"><span>0</span>天<span>0</span> <span>0</span> <span>0</span></div></div>
+				      	<div id="goods_time_id_${pd.GOODS_ID}_tj_right" class="suspend right" style="background: #FEE101;font-size: 0.7rem;text-align: center;padding:10px">活动结束倒计时<div id="goods_time_id_${pd.GOODS_ID}_tj"><span>0</span>天<span>0</span> <span>0</span> <span>0</span></div></div>
 				      </span>
 				    </div>
 				    <div class="card-content infoproContentBox">
-				      <div class="card-content-inner" style="padding:5px 0 0 0">
+				      <div class="card-content-inner" style="padding:10px 0 0px 0">
 				        <p><span style="margin-right:10px;padding:3px 10px;" class="myColor smFontSize">[${pd.PROVIDE}]提供</span>${pd.GOODSDESC}</p>
 				      </div>
 				    </div>
-				    <div class="card-footer infoproContentBox" style="border-bottom: solid 1px #DFDFDF;">
+				    <div class="card-footer infoproContentBox">
 				      <span>已售${pd.VIRTUALSELLED}份</span>
 				      <span>库存${pd.STORE}份</span>
 				    </div>
+					<div  style="width: 90%;margin: 0 auto;background: #F2F2F2; height: 1px"></div>
 				  </div>
 				  <script type="text/javascript">TimeDown("goods_time_id_${pd.GOODS_ID}_tj","${pd.ENDTIME}")</script>
 				</div>
 			</div>
-			<div class="row" style="padding:5px;">
-				<div class="col-100" style="font-size: 0.8rem;">已抢购用户</div>
+			<div class="row" style="padding:5px">
+				<div class="col-100" style="font-size: 0.7rem;">已抢购用户</div>
 			</div>
         	<div class="row" style="padding:5px;">
 				<div class="col-80 touxiangImage">
@@ -88,13 +97,13 @@
 					<p style="margin:0px;" class="bigFontSize">${shop.SHOPNAME}</p>
 					<p style="margin:0px;margin-top:10px;">${shop.SHOPADDRESS}</p>
 				</div>
-		        <div class="col-40" style="text-align:right;line-height:60px;"><img onclick="phone()" width="20" style="margin-right:15px;" src="<%=request.getContextPath()%>/static/icon/phone.png"/> | <img  onclick="position()" style="margin-left:15px;" width="20" src="<%=request.getContextPath()%>/static/icon/send.png"/></div>
+		        <div class="col-40" style="text-align:right;line-height:60px;"><img onclick="phone()" width="20" style="margin-right:15px;vertical-align: middle" src="<%=request.getContextPath()%>/static/icon/phone.png"/> | <img  onclick="position()" style="margin-left:15px;vertical-align: middle" width="20" src="<%=request.getContextPath()%>/static/icon/send.png"/></div>
 			</div>
-			<div style="width:100%;height:5px;margin: 10px 0" class="grayBox">&nbsp;</div>
-			<div class="row" style="padding:5px;" id="proInfoBox">
-				<div class="col-100">
+			<div style="width:100%;height:5px;margin: 10px 0 0 0;padding-bottom: 0" class="grayBox">&nbsp;</div>
+			<div class="row" style="padding:0 5px 5px 5px;" id="proInfoBox">
+				<div class="col-100" style="width: 104%;margin-left: 0">
 
-					<div class="buttons-tab" id="bignav" onscroll="myFunction()">
+					<div class="buttons-tab" id="bignav" style="border-bottom: solid 1px #F2F2F2" onscroll="myFunction()">
 
 						<%--<button id="roll1">商家信息</button>
                         <button id="roll2">购买须知</button>

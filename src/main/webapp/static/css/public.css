@@ -4,6 +4,7 @@
     overflow: hidden;
     margin-bottom: 0px !important;
     box-shadow: 0px 0px 5px #EfEfEf;
+    /*touch-action: none;*/
 }
 .proImage{
     border-radius: 20px !important;
@@ -49,6 +50,10 @@
 }
 .grayBox{
     background:#F2F2F2;
+    position: relative;
+    padding:3px 2%;
+    box-sizing: content-box;
+    left: -2%;
 }
 .tabFontSize a{
     font-size: 0.8rem!important;
