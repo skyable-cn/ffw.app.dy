@@ -42,7 +42,8 @@
 			    </div>
 			  </div>
 			</c:forEach>
-			</div>	
+			</div>
+			<div class="noOrdersBox">暂时没有待使用的订单！</div>
     	</div>
     </div>
   </body>

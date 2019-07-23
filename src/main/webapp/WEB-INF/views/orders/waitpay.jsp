@@ -43,6 +43,7 @@
 			    </div>
 			  </div>
 			</c:forEach>
+			<div class="noOrdersBox">暂时没有待支付的订单！</div>
 			</div>	
     	</div>
     </div>

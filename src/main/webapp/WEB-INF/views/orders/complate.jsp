@@ -16,6 +16,7 @@
     <div class="page-group">
         <div class="page page-current">
 			<div class="content">
+
 			<c:forEach var="var" items="${ordersData}">
 			<div class="card">
 			    <div class="card-header">下单时间:${var.CDT}</div>
@@ -42,6 +43,8 @@
 			    </div>
 			  </div>
 			</c:forEach>
+
+
 			</div>	
     	</div>
     </div>

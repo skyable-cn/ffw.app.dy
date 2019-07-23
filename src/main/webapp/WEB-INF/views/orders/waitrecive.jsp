@@ -42,6 +42,7 @@
 			    </div>
 			  </div>
 			</c:forEach>
+			<div class="noOrdersBox">暂时没有待收货的订单！</div>
 			</div>	
     	</div>
     </div>
