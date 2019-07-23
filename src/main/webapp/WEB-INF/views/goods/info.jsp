@@ -37,6 +37,9 @@
 			color: #474747;
 			font-weight: normal;
 		}
+		.infoBox img{
+			width: 100%;
+		}
 	</style>
   </head>
   <body>
@@ -131,7 +134,7 @@
 						  <%--
                                               <img style="border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;" height="200" width="100%" src="<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}" alt="">
                           --%>
-						  <div style="min-height:180px;padding:10px;word-wrap: break-word;word-break: break-all;overflow: hidden;">${pd.GOODSDETIAL}</div>
+						  <div class="infoBox" style="min-height:180px;padding:10px;word-wrap: break-word;word-break: break-all;overflow: hidden;">${pd.GOODSDETIAL}</div>
 
 					  </div>
 				  </div>

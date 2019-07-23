@@ -43,6 +43,7 @@ public class MyController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 
+		// 查询我的钱包中的金额
 		pd.put("FROMWXOPEN_ID", userSession().getString("WXOPEN_ID"));
 		pd.put("SQLCONDITION", " and os.GIVEMONEY is not null ");
 

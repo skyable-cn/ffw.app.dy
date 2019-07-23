@@ -212,13 +212,13 @@ public class PayController extends BaseController {
 		PageData pd = new PageData();
 		if ("goods".equals(type)) {
 			pd.put("ORDERSN", out_trade_no);
-
+			// 支付订单
 			pd = rest.post(IConstant.FFW_SERVICE_KEY, "orders/findBy", pd, PageData.class);
 
 			if (StringUtils.isNotEmpty(pd.getString("WEIXINSN"))) {
 				return "success";
 			}
-
+			// 支付订单修改状态，state为2
 			pd.put("WEIXINSN", transaction_id);
 			pd.put("STATE", IConstant.STRING_2);
 			rest.post(IConstant.FFW_SERVICE_KEY, "orders/edit", pd, PageData.class);
@@ -226,19 +226,24 @@ public class PayController extends BaseController {
 			if (pd.getString("VIPFLAG").equals(IConstant.STRING_1)) {
 
 				PageData pd1 = new PageData();
+				// 查询饭饭的月卡，季卡，年卡
 				List<PageData> product = rest.postForList(IConstant.FFW_SERVICE_KEY, "product/listAll", pd1,
 						new ParameterizedTypeReference<List<PageData>>() {
 						});
 
 				PageData pd0 = new PageData();
 				pd0.put("RECHARGESN", new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + randomNumber(5));
+				// 存入VIP优惠卡的ID
 				pd0.put("PRODUCT_ID", product.get(0).getString("PRODUCT_ID"));
 				pd0.put("MEMBER_ID", pd.getString("MEMBER_ID"));
+				// VIP优惠卡的金额
 				pd0.put("ORIGINAL", product.get(0).getString("PRODUCTMONEY"));
+				// VIP优惠卡的money
 				pd0.put("MONEY", product.get(0).getString("PRODUCTMONEY"));
 				pd0.put("DERATE", IConstant.STRING_0);
 				pd0.put("CDT", DateUtil.getTime());
 				pd0.put("STATE", IConstant.STRING_1);
+				//
 				rest.post(IConstant.FFW_SERVICE_KEY, "recharge/save", pd0, PageData.class);
 
 				PageData vipinfo = new PageData();
@@ -289,6 +294,7 @@ public class PayController extends BaseController {
 
 			PageData pdgoods = new PageData();
 			pdgoods.put("GOODS_ID", pd.getString("GOODS_ID"));
+
 			pdgoods = rest.post(IConstant.FFW_SERVICE_KEY, "goods/find", pdgoods, PageData.class);
 
 			pdgoods.put("BUYNUMBER",
@@ -301,11 +307,12 @@ public class PayController extends BaseController {
 				pdgoods.put("STATE", IConstant.STRING_2);
 			}
 			rest.post(IConstant.FFW_SERVICE_KEY, "goods/edit", pdgoods, PageData.class);
-
+			//获得商品的信息
 			PageData pdmember = new PageData();
 			pdmember.put("MEMBER_ID", pd.getString("MEMBER_ID"));
 			pdmember = rest.post(IConstant.FFW_SERVICE_KEY, "member/find", pdmember, PageData.class);
 
+			//MEMBERBACKMONEY=普通用户返利价格；
 			if (pdmember.getString("MEMBERTYPE_ID").equals(IConstant.STRING_1)
 					|| pdmember.getString("MEMBERTYPE_ID").equals(IConstant.STRING_3)) {
 				if (StringUtils.isNotEmpty(pdgoods.getString("MEMBERBACKMONEY"))) {
@@ -330,6 +337,7 @@ public class PayController extends BaseController {
 					rest.post(IConstant.FFW_SERVICE_KEY, "member/edit", pdwaitaccount, PageData.class);
 				}
 
+					//VIPBACKMONEY=会员用户返利价格；
 			} else if (pdmember.getString("MEMBERTYPE_ID").equals(IConstant.STRING_2)
 					|| pdmember.getString("MEMBERTYPE_ID").equals(IConstant.STRING_4)) {
 				if (StringUtils.isNotEmpty(pdgoods.getString("VIPBACKMONEY"))) {
@@ -381,6 +389,7 @@ public class PayController extends BaseController {
 
 					PageData pdwaitaccount0 = new PageData();
 					pdwaitaccount0.put("MEMBER_ID", pdmember0.getString("MEMBER_ID"));
+					// 将分销本级返利加入可提现的金额中
 					String waitaccount = String.valueOf(DoubleUtil.sum(
 							Double.parseDouble(pdmember0.getString("WAITACCOUNT")), Double.parseDouble(GIVEMONEY0)));
 					pdwaitaccount0.put("WAITACCOUNT", waitaccount);
