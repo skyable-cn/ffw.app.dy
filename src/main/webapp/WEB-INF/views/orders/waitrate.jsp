@@ -16,6 +16,7 @@
     <div class="page-group">
         <div class="page page-current">
 			<div class="content">
+				<c:if test="${ordersData!=null|| fn:length(ordersData) > 0}">
 			<c:forEach var="var" items="${ordersData}">
 			<div class="card">
 			    <div class="card-header">下单时间:${var.CDT}</div>
@@ -42,7 +43,10 @@
 			    </div>
 			  </div>
 			</c:forEach>
+				</c:if>
+				<c:if test="${ordersData==null || fn:length(ordersData) == 0}">
 			<div class="noOrdersBox">暂时没有待评价的订单！</div>
+				</c:if>
 			</div>	
     	</div>
     </div>

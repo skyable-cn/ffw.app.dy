@@ -49,7 +49,6 @@ public class HomeController extends BaseController {
 		pd1.put("SEARCHTYPE", IConstant.STRING_1);
 		pd1.put("page_currentPage", pd.getString("page_currentPage"));
 		Page page = rest.post(IConstant.FFW_SERVICE_KEY, "goods/listPage", pd1, Page.class);
-
 		pd.put("page", page);
 		return pd;
 	}

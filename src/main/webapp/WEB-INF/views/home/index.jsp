@@ -107,7 +107,8 @@
     				<div class="card demo-card-header-pic proBox">
     				    <a class="external" href="<%=request.getContextPath()%>/goods/info?GOODS_ID=`+value.GOODS_ID+`"><div valign="bottom" class="card-header color-white no-border no-padding">
     				      <img class='card-cover proImage' style="width:100%;" height="200px" src="<%=request.getContextPath()%>/file/image?FILENAME=`+value.FILEPATH+`" alt="">
-    				    </a></div>
+    				    </a>
+                     </div>
     				    <div class="card-footer proContentBox">
 	  				      <span class="bigFontSize">`;
 

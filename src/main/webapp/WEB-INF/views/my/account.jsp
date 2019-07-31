@@ -42,7 +42,9 @@
 			</div>
 	<div class="row" style="padding:10px;">
 				<div class="col-100" style="text-align:center;font-size:0.85rem;">收支明细</div>
-			</div>		
+			</div>
+
+				<c:if test="${ordersData!=null|| fn:length(ordersData) > 0}">
 	<c:forEach var="var" items="${orderData}" varStatus="status">
     <div class="row">
     	<div class="col-100" style="padding:5px;">
@@ -56,6 +58,10 @@
   		</div>
     </div>
     </c:forEach>
+				</c:if>
+				<c:if test="${ordersData==null || fn:length(ordersData) == 0}">
+					<div class="noOrdersBox">暂时没有待使用的订单！</div>
+				</c:if>
 			</div>
         </div>
     </div>

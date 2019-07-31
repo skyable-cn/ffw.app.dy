@@ -85,29 +85,29 @@
         	  </c:if>
         	   -->
         	   <div style="width:100%;height:10px;" class="grayBox">&nbsp;</div>
-        	   <div class="list-block" style="margin-top:5px;margin-bottom:2.5rem;">
-		    <ul>
-		      <!-- Text inputs -->
-		      <li>
-		        <div class="item-content">
-		          <div class="item-inner">
-		            <div class="item-input">
-		              <input id="USEPERSON" name="USEPERSON" type="text" placeholder="您的姓名">
-		            </div>
-		          </div>
-		        </div>
-		      </li>
-		      <li>
-		        <div class="item-content">
-		          <div class="item-inner">
-		            <div class="item-input">
-		              <input id="PERSONPHONE" name="PERSONPHONE" type="text" placeholder="联系方式">
-		            </div>
-		          </div>
-		        </div>
-		      </li>
-		    </ul>
-		  </div>
+				<%--  <div class="list-block" style="margin-top:5px;margin-bottom:2.5rem;">
+                     <ul>
+                       <!-- Text inputs -->
+                      <li>
+                         <div class="item-content">
+                           <div class="item-inner">
+                             <div class="item-input">
+                               <input id="USEPERSON" name="USEPERSON" type="text" placeholder="您的姓名">
+                             </div>
+                           </div>
+                         </div>
+                       </li>
+                      <li>
+                         <div class="item-content">
+                           <div class="item-inner">
+                             <div class="item-input">
+                               <input id="PERSONPHONE" name="PERSONPHONE" type="text" placeholder="联系方式">
+                             </div>
+                           </div>
+                         </div>
+                       </li>
+                     </ul>
+		  </div>--%>
         	</div>
         	<nav class="bar bar-tab">
   <div class="row">
@@ -150,7 +150,47 @@
   </body>
   <%@ include file="../common/headjs.jsp"%>
   <script type="text/javascript">
-  	function computer(opt){
+		// 乘法函数
+	  function accMul(arg1,arg2)
+	  {
+		  var m=0,s1=arg1.toString(),s2=arg2.toString();
+		  try{m+=s1.split(".")[1].length}catch(e){}
+		  try{m+=s2.split(".")[1].length}catch(e){}
+		  return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m)
+	  }
+		// 加法函数
+	  function accAdd(arg1,arg2){
+		  var r1,r2,m;
+		  try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}
+		  try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}
+		  m=Math.pow(10,Math.max(r1,r2))
+		  return (arg1*m+arg2*m)/m
+	  }
+		// 减法函数
+		function Subtr(arg1,arg2){
+			var r1,r2,m,n;
+			try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}
+			try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}
+			m=Math.pow(10,Math.max(r1,r2));
+			//last modify by deeka
+			//动态控制精度长度
+			n=(r1>=r2)?r1:r2;
+			return ((arg1*m-arg2*m)/m).toFixed(n);
+		}
+
+		// 除法函数
+		function accDiv(arg1,arg2){
+			var t1=0,t2=0,r1,r2;
+			try{t1=arg1.toString().split(".")[1].length}catch(e){}
+			try{t2=arg2.toString().split(".")[1].length}catch(e){}
+			with(Math){
+				r1=Number(arg1.toString().replace(".",""))
+				r2=Number(arg2.toString().replace(".",""))
+				return (r1/r2)*pow(10,t2-t1);
+			}
+		}
+
+		function computer(opt){
   		var num = parseInt(opt);
   		var count = parseInt($("#numberButton").text());
   		if(count <= 1 && num < 0){
@@ -159,12 +199,10 @@
   		
   		var lastNum = count+num;
   		$("#numberButton").text(lastNum);
-  		
-  		$("#XJ").html(lastNum * parseFloat('${pd.SELLMONEY}'));
-  		$("#SF").html(lastNum * parseFloat('${pd.SELLMONEY}') - parseFloat(MONEY) + parseFloat(VIPMONEY));
-  		$("#SFC").html((lastNum * parseFloat('${pd.SELLMONEY}') - parseFloat(MONEY) + parseFloat(VIPMONEY))*PERCENT);
-  		
-  		if(parseFloat($("#SF").text()) < 0){
+  		$("#XJ").html(accMul(lastNum , parseFloat('${pd.SELLMONEY}')));
+  		$("#SF").html(accAdd(Subtr(accMul(lastNum , parseFloat('${pd.SELLMONEY}')) , parseFloat(MONEY)) , parseFloat(VIPMONEY)));
+  		$("#SFC").html(accMul((accAdd(Subtr(accMul(lastNum , parseFloat('${pd.SELLMONEY}')) , parseFloat(MONEY)) , parseFloat(VIPMONEY))),PERCENT));
+			if(parseFloat($("#SF").text()) < 0){
   			$("#SF").html("0.00");
   			$("#SFC").html("0.00");
   		}
@@ -193,10 +231,10 @@
   		MONEY = money;
   		
   		var count = parseInt($("#numberButton").text());
-  		$("#XJ").html(count * parseFloat('${pd.SELLMONEY}'));
-  		$("#SF").html(count * parseFloat('${pd.SELLMONEY}') - parseFloat(MONEY) + parseFloat(VIPMONEY));
-  		$("#SFC").html((count * parseFloat('${pd.SELLMONEY}') - parseFloat(MONEY) + parseFloat(VIPMONEY))*PERCENT);
-  		
+		$("#XJ").html(accMul(count , parseFloat('${pd.SELLMONEY}')));
+		$("#SF").html(accAdd(Subtr(accMul(count , parseFloat('${pd.SELLMONEY}')) , parseFloat(MONEY)) , parseFloat(VIPMONEY)));
+		$("#SFC").html(accMul((accAdd(Subtr(accMul(count , parseFloat('${pd.SELLMONEY}')) , parseFloat(MONEY)) , parseFloat(VIPMONEY))),PERCENT));
+
   		if(parseFloat($("#SF").text()) < 0){
   			$("#SF").html("0.00");
   			$("#SFC").html("0.00");
@@ -204,6 +242,30 @@
   	}
   	
   	function orderSave(){
+		/*var otxt=document.getElementById('USEPERSON').value;
+		var phontxt=document.getElementById('PERSONPHONE').value;
+		var str = otxt.replace(/(^\s*)|(\s*$)/g, '');
+			if (str == '' || str == undefined || str == null) {
+				//return true;
+				alert("请输入联系人姓名");
+				return;
+			} else {
+				if(str != str.replace(/[^\u4E00-\u9FA5]/g,'')){
+					alert("亲。输入真实有效的姓名哟~！");
+				}else{
+					var reg = /^1(3|4|5|8)\d{1}[-]?\d{4}[-]?\d{4}$/;
+					if(phontxt == '' || phontxt == undefined || phontxt == null){
+						alert("请输入联系人电话");
+						return;
+					}else{
+						if (phontxt.match(reg)) {
+							alert("亲，亲正确输入联系人电话");
+							return;
+						}
+					}
+				}
+			}*/
+
   		$.ajax({
 			type: "POST",
 			url: '<%=request.getContextPath()%>/orders/save',
@@ -263,9 +325,10 @@
   		}
   		
   		var count = parseInt($("#numberButton").text());
-  		$("#XJ").html(count * parseFloat('${pd.SELLMONEY}'));
-  		$("#SF").html(count * parseFloat('${pd.SELLMONEY}') - parseFloat(MONEY) + parseFloat(VIPMONEY));
-  		$("#SFC").html((count * parseFloat('${pd.SELLMONEY}') - parseFloat(MONEY) + parseFloat(VIPMONEY))*PERCENT);
+
+		$("#XJ").html(accMul(count , parseFloat('${pd.SELLMONEY}')));
+		$("#SF").html(accAdd(Subtr(accMul(count , parseFloat('${pd.SELLMONEY}')) , parseFloat(MONEY)) , parseFloat(VIPMONEY)));
+		$("#SFC").html(accMul((accAdd(Subtr(accMul(count , parseFloat('${pd.SELLMONEY}')) , parseFloat(MONEY)) , parseFloat(VIPMONEY))),PERCENT));
   		
   		if(parseFloat($("#SF").text()) < 0){
   			$("#SF").html("0.00");

@@ -40,6 +40,7 @@
 		.infoBox img{
 			width: 100%;
 		}
+
 	</style>
   </head>
   <body>
@@ -49,9 +50,11 @@
 			<div class="row" style="padding:5px;">
 				<div class="col-100">
 				<div class="card demo-card-header-pic inFoBox" style="margin-bottom: 0">
-				    <div valign="bottom" class="card-header color-white no-border no-padding">
-				      <img class='card-cover' height="200" width="100%" style="border-radius: 10px" src="<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}" alt="" onerror="javascript:this.src='<%=request.getContextPath()%>/file/image?FILENAME=${pd.FILEPATH}';">
-				    </div>
+						<div valign="bottom" class="card-header color-white no-border no-padding">
+								<c:forEach var="var" items="${fileDataList}">
+									<img class='card-cover' height="200" width="100%" style="border-radius: 10px" src="<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}" alt="" onerror="javascript:this.src='<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}';">
+								</c:forEach>
+						</div>
 				    <div class="card-footer infoproContentBox" style="margin-top:10px;">
 				      <span>
 				      	<h4 style="margin:0px;"><font style="color:#F40A0B;" class="bigFontSize">${pd.SELLMONEY}元</font></h4>
@@ -89,9 +92,24 @@
 					<c:if test="${fn:length(peopleDataList) eq 0}">
 						<img src="<%=request.getContextPath()%>/static/icon/add.jpg"/>
 					</c:if>
-					<c:forEach var="var" items="${peopleDataList}">
-						<img src="${var.PHOTO}"/>
-					</c:forEach>
+						<%--<c:forEach var="var" items="${peopleDataList}">
+							<img src="${var.PHOTO}"/>
+						</c:forEach>--%>
+					<c:if test="${fn:length(peopleDataList) > 6}">
+						<img src="${peopleDataList[0].PHOTO}"/>
+						<img src="${peopleDataList[1].PHOTO}"/>
+						<img src="${peopleDataList[2].PHOTO}"/>
+						<img src="${peopleDataList[3].PHOTO}"/>
+						<img src="${peopleDataList[4].PHOTO}"/>
+						<img src="${peopleDataList[5].PHOTO}"/>
+						...
+					</c:if>
+					<c:if test="${fn:length(peopleDataList)<=5}">
+						<c:forEach var="var" items="${peopleDataList}">
+							<img src="${var.PHOTO}"/>
+						</c:forEach>
+					</c:if>
+
 				</div>
 			</div>
 			<div style="width:100%;height:5px;margin: 10px 0" class="grayBox">&nbsp;</div>
@@ -160,9 +178,22 @@
   <%@ include file="../common/headjs.jsp"%>
   <script type="text/javascript">
 
+	  window.onload=function(){
+		  fenxiang();
+	  }
+	  function fenxiang(){
+		  tt.miniProgram.navigateTo({
+			  url: '/pages/webview/webview?shopid=${shop.SHOP_ID}&shopname=${shop.SHOPNAME}&goodsid=${goodsid}'
+		  })
+	  }
+
 	  var startx, starty;
 	  //获得角度
 	  function getAngle(angx, angy) {
+
+
+
+
 		  return Math.atan2(angy, angx) * 180 / Math.PI;
 	  };
 

@@ -158,6 +158,7 @@ public class PayController extends BaseController {
 		param.put("sign_type", "MD5");
 		param.put("timestamp", dl);
 		param.put("version", "1.0");
+		System.out.println("=========开始向https://tp-pay.snssdk.com/gateway，认证签名发送param=========");
 		String str = HttpUtils.post("https://tp-pay.snssdk.com/gateway", param);
 		System.err.println(str);
 

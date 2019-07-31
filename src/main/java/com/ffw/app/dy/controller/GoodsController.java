@@ -51,6 +51,7 @@ public class GoodsController extends BaseController {
 		mv.addObject("fileDataList", fileDataList);
 
 		mv.addObject("pd", pd);
+		mv.addObject("goodsid", pd.getString("GOODS_ID"));
 		mv.setViewName("goods/info");
 		return mv;
 	}

@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <script type="text/javascript">
+
 	function getDate24Hours(){
 		//获取当前时间
 		var date = new Date();
@@ -40,7 +41,7 @@
 	    
 	    if(document.getElementById(id) != null){
 		    //输出到页面
-		    document.getElementById(id).innerHTML = "<span>"+ days + "</span>天<span>" + hours + "</span> <span>" + minutes + "</span> <span>" + seconds +"</span>";
+		    document.getElementById(id).innerHTML = "<span>"+ parseInt(days) + "</span>天<span>" + parseInt(hours) + "</span> <span>" + parseInt(minutes) + "</span> <span>" + parseInt(seconds) +"</span>";
 		    //延迟一秒执行自己
 		    
 		    if(days<0 || hours<0 || minutes<0 || seconds <0){
@@ -53,5 +54,6 @@
 	        TimeDown(id, endDateStr);
 	    }, 1000)
 	}
+
 </script>
 
