@@ -167,6 +167,7 @@
 <script type="text/javascript">
 
     var loading = false;
+    console.log($);
 
     $.init();
 

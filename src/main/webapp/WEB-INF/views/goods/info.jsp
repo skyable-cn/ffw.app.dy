@@ -14,6 +14,7 @@
     <%@ include file="../common/utiljs.jsp"%>
     <script type="text/javascript" src="https://s3.pstatp.com/toutiao/tmajssdk/jssdk-1.0.0.js"></script>
 	<style>
+		* { touch-action: pan-y; }
 		.positionBox{
 			position:fixed;
 			top: 0;
@@ -40,7 +41,31 @@
 		.infoBox img{
 			width: 100%;
 		}
-
+		.scrollBox{
+			width: 100%;
+			height: 200px;
+			border-radius: 5px;
+			overflow-x: hidden;
+		}
+		.swipslider{
+			width: 100%;
+			height: 100%;
+			margin: 0;
+		}
+		.sw-bullet>li{
+			width: 50px;
+			border-radius: 0;
+			height: 3px;
+		}
+		.sw-bullet li.active{
+			background: rgba(253,227,49,0.8);
+		}
+		.sw-bullet{
+			bottom: 8%;
+		}
+		.sw-next-prev{
+			display: none;
+		}
 	</style>
   </head>
   <body>
@@ -51,9 +76,15 @@
 				<div class="col-100">
 				<div class="card demo-card-header-pic inFoBox" style="margin-bottom: 0">
 						<div valign="bottom" class="card-header color-white no-border no-padding">
-								<c:forEach var="var" items="${fileDataList}">
-									<img class='card-cover' height="200" width="100%" style="border-radius: 10px" src="<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}" alt="" onerror="javascript:this.src='<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}';">
-								</c:forEach>
+                            <figure id="full_feature" class="swipslider">
+                                <ul class="sw-slides">
+                                    <c:forEach var="var" items="${fileDataList}" varStatus="xh">
+                                        <li class="sw-slide">
+                                            <img class='card-cover' height="200" style="border-radius: 10px;float:right;" src="<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}"  myIndex = ${xh.index}  alt="" onerror="javascript:this.src='<%=request.getContextPath()%>/file/image?FILENAME=${var.FILEPATH}';">
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </figure>
 						</div>
 				    <div class="card-footer infoproContentBox" style="margin-top:10px;">
 				      <span>
@@ -177,7 +208,9 @@
   </body>
   <%@ include file="../common/headjs.jsp"%>
   <script type="text/javascript">
-
+	  JQ$(window).on('load',function(){
+		  JQ$('#full_feature').swipeslider();
+	  });
 	  window.onload=function(){
 		  fenxiang();
 	  }
@@ -186,28 +219,20 @@
 			  url: '/pages/webview/webview?shopid=${shop.SHOP_ID}&shopname=${shop.SHOPNAME}&goodsid=${goodsid}'
 		  })
 	  }
-
 	  var startx, starty;
 	  //获得角度
 	  function getAngle(angx, angy) {
-
-
-
-
 		  return Math.atan2(angy, angx) * 180 / Math.PI;
 	  };
-
 	  //根据起点终点返回方向 1向上 2向下 3向左 4向右 0未滑动
 	  function getDirection(startx, starty, endx, endy) {
 		  var angx = endx - startx;
 		  var angy = endy - starty;
 		  var result = 0;
-
 		  //如果滑动距离太短
 		  if (Math.abs(angx) < 2 && Math.abs(angy) < 2) {
 			  return result;
 		  }
-
 		  var angle = getAngle(angx, angy);
 		  if (angle >= -135 && angle <= -45) {
 			  result = 1;
@@ -218,11 +243,8 @@
 		  } else if (angle >= -45 && angle <= 45) {
 			  result = 4;
 		  }
-
 		  return result;
 	  }
-
-
 	  $(".content").scroll(function (evt) {
 		  var ss3=$("#proInfoBox").offset().top;
 		  if(ss3<-1){
@@ -237,7 +259,6 @@
 		  starty = e.touches[0].pageY;
 	  }, false);
 	  //手指离开屏幕
-
 	  document.addEventListener("touchend", function(e) {
 		  var endx, endy;
 		  endx = e.changedTouches[0].pageX;
@@ -278,7 +299,6 @@
 			  default:
 		  }
 	  }, false);
-
 	  $(document).ready(function() {
 		  document.querySelector("#roll1").onclick = function(){
 			  document.querySelector("#roll_top").scrollIntoView(true);
@@ -299,8 +319,6 @@
 		  }
 
 	  });
-
-
   	function phone(){
   		tt.miniProgram.navigateTo({
             url: '/pages/phone/phone?phone=${shop.CONTRACTPHONE}'

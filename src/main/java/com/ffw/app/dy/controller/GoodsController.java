@@ -49,6 +49,7 @@ public class GoodsController extends BaseController {
 				new ParameterizedTypeReference<List<PageData>>() {
 				});
 		mv.addObject("fileDataList", fileDataList);
+		mv.addObject("fileDataListlength", fileDataList.size());
 
 		mv.addObject("pd", pd);
 		mv.addObject("goodsid", pd.getString("GOODS_ID"));
